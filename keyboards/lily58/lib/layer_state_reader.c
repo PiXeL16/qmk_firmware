@@ -1,32 +1,53 @@
 #include "action_layer.h"
 #include <stdio.h>
 
-#define L_BASE 0
-#define L_LOWER (1 << 1)
-#define L_RAISE (1 << 2)
-#define L_ADJUST (1 << 3)
-#define L_ADJUST_TRI (L_ADJUST | L_RAISE | L_LOWER)
+// Layer numbers (matching keymap.c enum layer_number)
+#define L_QWERTY 0
+#define L_SHIFT 1
+#define L_SYMBOLS 2
+#define L_NAV 3
+#define L_RAISE 4
+#define L_FUNCTION 5
+#define L_EMOJI 6
+#define L_SPANISH 7
+#define L_MOUSE 8
 
 char layer_state_str[24];
 
 const char *read_layer_state(void) {
-  switch (layer_state)
+  uint8_t current_layer = get_highest_layer(layer_state);
+  
+  switch (current_layer)
   {
-  case L_BASE:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Base");
+  case L_QWERTY:
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: QWERTY");
+    break;
+  case L_SHIFT:
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: SHIFT");
+    break;
+  case L_SYMBOLS:
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: SYMBOLS");
+    break;
+  case L_NAV:
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: NAV");
     break;
   case L_RAISE:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Raise");
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: RAISE");
     break;
-  case L_LOWER:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Lower");
+  case L_FUNCTION:
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: FUNCTION");
     break;
-  case L_ADJUST:
-  case L_ADJUST_TRI:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Adjust");
+  case L_EMOJI:
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: EMOJI");
+    break;
+  case L_SPANISH:
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: ESPAÑOL");
+    break;
+  case L_MOUSE:
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: MOUSE");
     break;
   default:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Undef-%u", layer_state);
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Undef-%u", current_layer);
   }
 
   return layer_state_str;

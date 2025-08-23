@@ -1,0 +1,31 @@
+.build/obj_lily58_rev1_default/quantum/logging/debug.o: \
+ quantum/logging/debug.c keyboards/lily58/config.h \
+ .build/obj_lily58_rev1_default/src/info_config.h \
+ keyboards/lily58/keymaps/default/config.h \
+ quantum/split_common/post_config.h quantum/logging/debug.h \
+ quantum/logging/print.h quantum/util.h quantum/bits.h quantum/bitwise.h \
+ platforms/avr/_util.h quantum/logging/sendchar.h platforms/progmem.h
+
+keyboards/lily58/config.h:
+
+.build/obj_lily58_rev1_default/src/info_config.h:
+
+keyboards/lily58/keymaps/default/config.h:
+
+quantum/split_common/post_config.h:
+
+quantum/logging/debug.h:
+
+quantum/logging/print.h:
+
+quantum/util.h:
+
+quantum/bits.h:
+
+quantum/bitwise.h:
+
+platforms/avr/_util.h:
+
+quantum/logging/sendchar.h:
+
+platforms/progmem.h:
