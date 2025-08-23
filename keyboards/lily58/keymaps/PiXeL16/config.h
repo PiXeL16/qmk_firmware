@@ -21,13 +21,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #define QUICK_TAP_TERM 0
-#define TAPPING_TERM 200
+#define TAPPING_TERM 100
 
 // Home row modifiers settings
 #define PERMISSIVE_HOLD
 
-// Unicode settings for emoji support
-#define UNICODE_SELECTED_MODES UNICODE_MODE_MACOS
+// Unicode settings for Spanish character support (temporarily disabled)
+// #define UNICODE_SELECTED_MODES UC_MAC
 
 #undef RGBLIGHT_LED_COUNT
 #define RGBLIGHT_EFFECT_BREATHING

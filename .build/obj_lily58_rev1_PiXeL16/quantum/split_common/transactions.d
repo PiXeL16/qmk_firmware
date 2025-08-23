@@ -17,7 +17,7 @@
  quantum/split_common/transport.h quantum/action_layer.h \
  quantum/keyboard.h quantum/action.h quantum/action_code.h \
  quantum/split_common/split_util.h platforms/synchronization_util.h \
- drivers/oled/oled_driver.h quantum/wpm.h
+ drivers/oled/oled_driver.h
 
 keyboards/lily58/config.h:
 
@@ -102,5 +102,3 @@ quantum/split_common/split_util.h:
 platforms/synchronization_util.h:
 
 drivers/oled/oled_driver.h:
-
-quantum/wpm.h:

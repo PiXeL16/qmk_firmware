@@ -15,10 +15,7 @@
  quantum/led.h quantum/sync_timer.h quantum/logging/print.h \
  quantum/logging/sendchar.h quantum/logging/debug.h quantum/command.h \
  quantum/mousekey.h drivers/oled/oled_driver.h quantum/crc.h \
- quantum/split_common/split_util.h quantum/unicode/unicode.h \
- quantum/unicode/unicode_keycodes.h quantum/quantum_keycodes.h \
- quantum/keymap_extras/keymap_us.h quantum/sequencer/sequencer.h \
- quantum/quantum_keycodes_legacy.h quantum/wpm.h
+ quantum/split_common/split_util.h
 
 keyboards/lily58/config.h:
 
@@ -101,17 +98,3 @@ drivers/oled/oled_driver.h:
 quantum/crc.h:
 
 quantum/split_common/split_util.h:
-
-quantum/unicode/unicode.h:
-
-quantum/unicode/unicode_keycodes.h:
-
-quantum/quantum_keycodes.h:
-
-quantum/keymap_extras/keymap_us.h:
-
-quantum/sequencer/sequencer.h:
-
-quantum/quantum_keycodes_legacy.h:
-
-quantum/wpm.h:
