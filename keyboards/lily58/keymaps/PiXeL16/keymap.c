@@ -28,10 +28,10 @@ enum layer_number {
 
 enum custom_keycodes {
   // Application navigation shortcuts
-  NAV_BACK = SAFE_RANGE,      // Ctrl+[
-  NAV_FORWARD,   // Ctrl+]
-  TAB_PREV,      // Ctrl+Shift+Tab
-  TAB_NEXT,      // Ctrl+Tab
+  NAV_BACK = SAFE_RANGE,      // Cmd+[
+  NAV_FORWARD,   // Cmd+]
+  TAB_PREV,      // Cmd+Shift+[
+  TAB_NEXT,      // Cmd+Shift+]
   // Workspace navigation shortcuts (macOS)
   WS_LEFT,       // Ctrl+Left (previous space)
   WS_RIGHT,      // Ctrl+Right (next space)
@@ -377,35 +377,37 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Application navigation shortcuts
     case NAV_BACK:
       if (record->event.pressed) {
-        register_code(KC_LCTL);
+        register_code(KC_LGUI);
         tap_code(KC_LBRC);
-        unregister_code(KC_LCTL);
+        unregister_code(KC_LGUI);
       }
       return false;
       
     case NAV_FORWARD:
       if (record->event.pressed) {
-        register_code(KC_LCTL);
+        register_code(KC_LGUI);
         tap_code(KC_RBRC);
-        unregister_code(KC_LCTL);
+        unregister_code(KC_LGUI);
       }
       return false;
       
     case TAB_PREV:
       if (record->event.pressed) {
-        register_code(KC_LCTL);
+        register_code(KC_LGUI);
         register_code(KC_LSFT);
-        tap_code(KC_TAB);
+        tap_code(KC_LBRC);
         unregister_code(KC_LSFT);
-        unregister_code(KC_LCTL);
+        unregister_code(KC_LGUI);
       }
       return false;
       
     case TAB_NEXT:
       if (record->event.pressed) {
-        register_code(KC_LCTL);
-        tap_code(KC_TAB);
-        unregister_code(KC_LCTL);
+        register_code(KC_LGUI);
+        register_code(KC_LSFT);
+        tap_code(KC_RBRC);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_LGUI);
       }
       return false;
 
