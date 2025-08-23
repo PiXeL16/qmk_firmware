@@ -25,6 +25,17 @@ To compile this keymap:
 qmk compile -kb lily58/rev1 -km PiXeL16
 ```
 
+## Features
+
+This keymap implements several advanced QMK features including:
+
+- **Home Row Modifiers**: Shift, Cmd, Alt, Ctrl on ASDF/JKL; home row keys
+- **Layer Tap Keys**: Multiple layers activated by holding specific keys
+- **Smart Brackets**: Automatic cursor positioning when typing brackets
+- **Navigation Shortcuts**: Application and workspace navigation macros
+- **Emoji Layer**: One-shot emoji layer with intuitive letter-to-emoji mappings
+- **Custom Layers**: SHIFT, SYMBOLS, FUNCTION, and EMOJI layers with specialized layouts
+
 ## Configuration Details
 
 - **Keyboard**: lily58
@@ -33,3 +44,8 @@ qmk compile -kb lily58/rev1 -km PiXeL16
 - **Generated**: Created via `qmk new-keymap` command
 
 The keymap files are located in: `keyboards/lily58/keymaps/PiXeL16/`
+
+## References
+
+This keymap was inspired by advanced features from:
+- [My Personalised Keyboard](https://leanrada.com/notes/my-personalised-keyboard/) - Advanced QMK customization techniques and layer design concepts
