@@ -20,13 +20,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#define QUICK_TAP_TERM 0
-#define TAPPING_TERM 100
+// Layer-tap configuration for space bar layer switching
+#define TAPPING_TERM 200                     // 200ms for tap/hold detection
+#define TAPPING_TERM_PER_KEY                 // Allow per-key tapping term customization
+#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY      // Allow per-key hold-on-other-key-press behavior
+#define QUICK_TAP_TERM 0                     // Disable quick tap for more consistent behavior
 
-// Home row modifiers settings
-#define PERMISSIVE_HOLD
+// Combo configuration
+#define COMBO_TERM 50                        // 50ms window to press both keys for combo
 
-// Unicode settings for Spanish character support (temporarily disabled)
+// Unicode settings for emoji layer (using UNICODEMAP instead)
 // #define UNICODE_SELECTED_MODES UC_MAC
 
 #undef RGBLIGHT_LED_COUNT

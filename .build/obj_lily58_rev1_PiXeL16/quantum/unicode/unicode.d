@@ -23,6 +23,7 @@
  quantum/compiler_support.h quantum/keycode_string.h \
  platforms/bootloader.h quantum/sync_timer.h platforms/atomic_util.h \
  platforms/avr/atomic_util.h quantum/action_tapping.h platforms/suspend.h \
+ quantum/unicode/unicodemap.h quantum/process_keycode/process_combo.h \
  quantum/process_keycode/process_space_cadet.h drivers/oled/oled_driver.h \
  quantum/wpm.h quantum/mousekey.h
 
@@ -137,6 +138,10 @@ platforms/avr/atomic_util.h:
 quantum/action_tapping.h:
 
 platforms/suspend.h:
+
+quantum/unicode/unicodemap.h:
+
+quantum/process_keycode/process_combo.h:
 
 quantum/process_keycode/process_space_cadet.h:
 

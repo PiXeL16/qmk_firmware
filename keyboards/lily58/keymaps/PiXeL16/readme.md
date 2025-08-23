@@ -27,7 +27,7 @@ This isn't just another keymap – it's a complete keyboard personality system t
 ## 🗂️ Layer System (9 Total Layers)
 
 ### 0️⃣ **QWERTY** - Base Layer
-Standard QWERTY with optimized thumb cluster and home row modifiers
+Standard QWERTY with optimized thumb cluster for efficient layer access
 
 ### 1️⃣ **SHIFT** - Shifted Characters  
 Top row symbols and shifted number row for efficient symbol input
@@ -77,9 +77,8 @@ Number row, function keys, and additional navigation
 ## 🔧 Advanced QMK Features
 
 ### ⌨️ Smart Input Features
-- **Home Row Modifiers**: Shift, Cmd, Alt, Ctrl on home row
-- **Tap-Hold Optimization**: `TAPPING_TERM 200` with `PERMISSIVE_HOLD`
 - **Smart Space Layer**: Space key doubles as Shift layer access
+- **Layer-Tap Optimization**: `TAPPING_TERM 200` optimized for layer switching
 - **Combo Detection**: Space+Enter combo triggers Cmd+Space
 
 ### 🌐 Unicode & International Support
@@ -166,6 +165,19 @@ qmk flash -kb lily58/rev1 -km PiXeL16
 // Change to 10000 for 10-second testing
 ```
 
+### Layer-Tap Configuration
+```c
+// In config.h - optimized for smooth typing experience
+#define TAPPING_TERM 200              // 200ms for layer-tap detection
+#define TAPPING_TERM_PER_KEY          // Customizable per key
+```
+
+### Combo Configuration
+```c
+// In config.h - combo timing
+#define COMBO_TERM 50                 // 50ms window to press both keys
+```
+
 ### Manual Display Rotation
 Press the `ROTATE_DISPLAY` key (available in function layer) to manually cycle through logos.
 
@@ -175,6 +187,7 @@ Edit `keyboards/lily58/lib/layer_icon_reader.c` to customize the ASCII art layer
 ## 🎯 Usage Tips
 
 ### Essential Combos
+- **Spotlight Search**: Space + Enter → Cmd+Space (quick access to Spotlight)
 - **Emoji Access**: Function layer → E (single tap for layer, double tap for system picker)
 - **Spanish Characters**: Function layer → S → letter
 - **Word Navigation**: NAV layer → W←/W→/WSel/W⌫
@@ -183,7 +196,7 @@ Edit `keyboards/lily58/lib/layer_icon_reader.c` to customize the ASCII art layer
 ### Layer Access
 - **Primary**: Thumb keys for most-used layers (NAV, SYMBOLS, MOUSE, FUNCTION)
 - **Secondary**: Function layer triggers for specialty layers (EMOJI, SPANISH)
-- **Modifiers**: Home row modifiers for all standard mod keys
+- **Modifiers**: Traditional modifier keys (Ctrl, Alt, Shift, GUI) in standard positions
 
 ### OLED Information
 - **Left Display**: Always shows current layer and typing stats

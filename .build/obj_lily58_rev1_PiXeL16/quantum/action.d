@@ -20,9 +20,12 @@
  quantum/sequencer/sequencer.h quantum/quantum_keycodes_legacy.h \
  quantum/keycode_string.h platforms/bootloader.h quantum/sync_timer.h \
  platforms/atomic_util.h platforms/avr/atomic_util.h platforms/suspend.h \
+ quantum/unicode/unicode.h quantum/unicode/unicode_keycodes.h \
+ quantum/unicode/unicodemap.h quantum/process_keycode/process_combo.h \
  quantum/process_keycode/process_space_cadet.h \
  quantum/send_string/send_string.h \
- quantum/send_string/send_string_keycodes.h drivers/oled/oled_driver.h
+ quantum/send_string/send_string_keycodes.h drivers/oled/oled_driver.h \
+ quantum/wpm.h
 
 keyboards/lily58/config.h:
 
@@ -132,6 +135,14 @@ platforms/avr/atomic_util.h:
 
 platforms/suspend.h:
 
+quantum/unicode/unicode.h:
+
+quantum/unicode/unicode_keycodes.h:
+
+quantum/unicode/unicodemap.h:
+
+quantum/process_keycode/process_combo.h:
+
 quantum/process_keycode/process_space_cadet.h:
 
 quantum/send_string/send_string.h:
@@ -139,3 +150,5 @@ quantum/send_string/send_string.h:
 quantum/send_string/send_string_keycodes.h:
 
 drivers/oled/oled_driver.h:
+
+quantum/wpm.h:

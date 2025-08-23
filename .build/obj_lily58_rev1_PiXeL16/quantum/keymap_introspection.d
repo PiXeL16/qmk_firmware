@@ -22,11 +22,14 @@
  quantum/bits.h platforms/avr/_util.h tmk_core/protocol/host_driver.h \
  quantum/led.h quantum/action_util.h quantum/action_tapping.h \
  quantum/logging/print.h quantum/logging/sendchar.h \
- quantum/logging/debug.h platforms/suspend.h \
+ quantum/logging/debug.h platforms/suspend.h quantum/unicode/unicode.h \
+ quantum/unicode/unicode_keycodes.h quantum/unicode/unicodemap.h \
+ quantum/process_keycode/process_combo.h \
  quantum/process_keycode/process_space_cadet.h \
  quantum/send_string/send_string.h \
  quantum/send_string/send_string_keycodes.h drivers/oled/oled_driver.h \
- quantum/mousekey.h quantum/keymap_introspection.h
+ quantum/wpm.h quantum/mousekey.h quantum/keymap_extras/keymap_spanish.h \
+ quantum/keymap_introspection.h
 
 keyboards/lily58/config.h:
 
@@ -134,6 +137,14 @@ quantum/logging/debug.h:
 
 platforms/suspend.h:
 
+quantum/unicode/unicode.h:
+
+quantum/unicode/unicode_keycodes.h:
+
+quantum/unicode/unicodemap.h:
+
+quantum/process_keycode/process_combo.h:
+
 quantum/process_keycode/process_space_cadet.h:
 
 quantum/send_string/send_string.h:
@@ -142,6 +153,10 @@ quantum/send_string/send_string_keycodes.h:
 
 drivers/oled/oled_driver.h:
 
+quantum/wpm.h:
+
 quantum/mousekey.h:
+
+quantum/keymap_extras/keymap_spanish.h:
 
 quantum/keymap_introspection.h:

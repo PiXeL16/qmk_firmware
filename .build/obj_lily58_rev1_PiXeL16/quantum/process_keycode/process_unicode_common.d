@@ -13,7 +13,7 @@
  quantum/sequencer/sequencer.h quantum/quantum_keycodes_legacy.h \
  quantum/action_util.h tmk_core/protocol/report.h quantum/util.h \
  quantum/bits.h quantum/bitwise.h platforms/avr/_util.h \
- quantum/process_keycode/process_unicode.h
+ quantum/process_keycode/process_unicodemap.h
 
 keyboards/lily58/config.h:
 
@@ -69,4 +69,4 @@ quantum/bitwise.h:
 
 platforms/avr/_util.h:
 
-quantum/process_keycode/process_unicode.h:
+quantum/process_keycode/process_unicodemap.h:

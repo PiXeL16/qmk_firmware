@@ -9,7 +9,11 @@
  platforms/timer.h platforms/avr/_timer.h quantum/action.h \
  quantum/keycode.h quantum/keycodes.h quantum/modifiers.h \
  quantum/action_code.h quantum/nvm/nvm_eeconfig.h \
- quantum/keycode_config.h quantum/compiler_support.h
+ quantum/keycode_config.h quantum/compiler_support.h \
+ quantum/unicode/unicode.h quantum/compiler_support.h \
+ quantum/unicode/unicode_keycodes.h quantum/quantum_keycodes.h \
+ quantum/keymap_extras/keymap_us.h quantum/sequencer/sequencer.h \
+ quantum/quantum_keycodes_legacy.h
 
 keyboards/lily58/config.h:
 
@@ -60,3 +64,17 @@ quantum/nvm/nvm_eeconfig.h:
 quantum/keycode_config.h:
 
 quantum/compiler_support.h:
+
+quantum/unicode/unicode.h:
+
+quantum/compiler_support.h:
+
+quantum/unicode/unicode_keycodes.h:
+
+quantum/quantum_keycodes.h:
+
+quantum/keymap_extras/keymap_us.h:
+
+quantum/sequencer/sequencer.h:
+
+quantum/quantum_keycodes_legacy.h:
