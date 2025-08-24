@@ -1,5 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "keymap_spanish.h"
+// #include "sm_td.h"  // Commented out - not using SM_TD
 
 #ifdef WPM_ENABLE
 #include "wpm.h"
@@ -23,7 +24,7 @@ enum layer_number {
   _FUNCTION,
   _SPANISH,
   _MOUSE,
-  _EMOJI,
+  // _EMOJI,  // Commented out to save memory for SM_TD
 };
 
 enum custom_keycodes {
@@ -53,7 +54,6 @@ enum custom_keycodes {
   SYM_RABK,      // Smart >
   // Spanish layer picker
   SPANISH_PICKER, // Spanish character picker
-  EMOJI_PICKER,   // Emoji layer picker
   ES_A_ACCENT,    // á (dead key + a)
   ES_E_ACCENT,    // é (dead key + e)  
   ES_I_ACCENT,    // í (dead key + i)
@@ -68,14 +68,15 @@ enum combo_events {
 };
 
 // Define which keys make up each combo
-const uint16_t PROGMEM space_enter_combo[] = {LT(_SHIFT, KC_SPC), KC_ENT, COMBO_END};
+const uint16_t PROGMEM space_enter_combo[] = {KC_SPC, KC_ENT, COMBO_END};
 
 // Map combos to their key combinations
 combo_t key_combos[] = {
   [SPACE_ENTER_COMBO] = COMBO(space_enter_combo, KC_NO), // KC_NO means we handle it in process_combo_event
 };
 
-// Emoji unicode map
+// Emoji unicode map - COMMENTED OUT TO SAVE MEMORY FOR SM_TD
+/*
 enum unicode_names {
   GRIN,    // 😀 grinning face  
   SMILE,   // 😁 grinning face with smiling eyes
@@ -130,6 +131,7 @@ const uint32_t unicode_map[] PROGMEM = {
   [OK] = 0x1F44C,      // 👌
   [POINT] = 0x1F449,   // 👉
 };
+*/
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -139,11 +141,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |LCTRL |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
+ * |LCTRL |A/Shft|S/Alt |D/Ctrl|F/Cmd |   G  |-------.    ,-------|   H  |J/Cmd |K/Ctrl|L/Alt |;/Shft|  '   |
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | NAV  |LGUI| /SPC/SFT/       \Enter \  |SYMBO |MOUSE | FUNC |
+ *                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
  *                   |      |      |      |/      /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -161,11 +163,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |   !  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |   "  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   :  |  '   |
+ * | Tab  |A/Shft|S/Alt |D/Ctrl|F/Cmd |   G  |-------.    ,-------|   H  |J/Cmd |K/Ctrl|L/Alt |:/Shft|  '   |
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ;  |   :  |   *  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | NAV  |LGUI| /SPC/SFT/       \Enter \  |SYMBO |MOUSE | FUNC |
+ *                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
  *                   |      |      |      |/      /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -174,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_EXLM,  S(KC_Q), S(KC_W), S(KC_E), S(KC_R), S(KC_T),                   S(KC_Y), S(KC_U), S(KC_I), S(KC_O), S(KC_P), KC_DQUO,
   KC_TAB,   S(KC_A), S(KC_S), S(KC_D), S(KC_F), S(KC_G),                   S(KC_H), S(KC_J), S(KC_K), S(KC_L), KC_COLN, KC_QUOT,
   KC_LSFT,  S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B), KC_LBRC, KC_RBRC, S(KC_N), S(KC_M), KC_SCLN, KC_COLN, KC_ASTR, KC_RSFT,
-                             KC_LALT, MO(_NAV), KC_LGUI, LT(_SHIFT, KC_SPC), KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
+                             KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
 /* SYMBOLS
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -186,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |  [   |  ]   |  +   |-------|    |-------|      |   _  |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | NAV  |LGUI| /SPC/SFT/       \Enter \  |SYMBO |MOUSE | FUNC |
+ *                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
  *                   |      |      |      |/      /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -195,7 +197,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV, KC_BSLS, KC_DLR,  SYM_LCBR, SYM_RCBR, _______,                   _______, _______, _______, _______, _______, _______,
   SYM_LABK, KC_EQL, KC_MINS, SYM_LPRN, SYM_RPRN, SYM_RABK,                   KC_CIRC, KC_BSLS, KC_PERC, KC_UP, _______, _______,
   _______, _______, _______, SYM_LBRC, SYM_RBRC, KC_PLUS, _______, _______, _______, KC_UNDS, _______, _______, _______, _______,
-                             KC_LALT, MO(_NAV), KC_LGUI, LT(_SHIFT, KC_SPC), KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
+                             KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
 /* FUNCTION 
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -207,16 +209,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | NAV  |LGUI| /SPC/SFT/       \Enter \  |SYMBO |MOUSE | FUNC |
+ *                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
  *                   |      |      |      |/      /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
 [_FUNCTION] = LAYOUT(
   KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-  _______, _______, SPANISH_PICKER, EMOJI_PICKER, _______, _______,       _______, KC_MPRV, KC_MNXT, KC_MPLY, KC_VOLD, KC_VOLU,
+  _______, _______, SPANISH_PICKER, /*EMOJI_PICKER*/ _______, _______, _______,       _______, KC_MPRV, KC_MNXT, KC_MPLY, KC_VOLD, KC_VOLU,
   _______, _______, _______, _______, _______, _______,                   _______, _______, _______, KC_BRMD, KC_BRMU, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                             KC_LALT, MO(_NAV), KC_LGUI, LT(_SHIFT, KC_SPC), KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
+                             KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
 /* SPANISH (Español)
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -228,7 +230,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|   ñ  |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | NAV  |LGUI| /SPC/SFT/       \Enter \  |SYMBO |MOUSE | FUNC |
+ *                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
  *                   |      |      |      |/      /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -237,7 +239,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ES_IEXL, _______, _______, ES_E_ACCENT, _______, _______,              _______, ES_U_ACCENT, ES_I_ACCENT, ES_O_ACCENT, _______, ES_IQUE,
   _______, ES_A_ACCENT, _______, _______, _______, _______,                  _______, _______, _______, _______, _______, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, ES_NTIL, _______, _______, _______, _______, _______,
-                             KC_LALT, MO(_NAV), KC_LGUI, LT(_SHIFT, KC_SPC), KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
+                             KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
 /* MOUSE (Mouse Control)
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -249,7 +251,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      | MClk |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | NAV  |LGUI| /SPC/SFT/       \Enter \  |SYMBO |MOUSE | FUNC |
+ *                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
  *                   |      |      |      |/      /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -258,7 +260,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, KC_MS_WH_UP, _______, _______, _______,              _______, KC_MS_UP, _______, _______, _______, _______,
   _______, KC_MS_BTN1, KC_MS_WH_DOWN, KC_MS_BTN2, _______, _______,      KC_MS_LEFT, KC_MS_DOWN, KC_MS_UP, KC_MS_RIGHT, _______, _______,
   _______, _______, KC_MS_BTN3, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                             KC_LALT, MO(_NAV), KC_LGUI, LT(_SHIFT, KC_SPC), KC_ENT, MO(_SYMBOLS), _______, MO(_FUNCTION)
+                             KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), _______, MO(_FUNCTION)
 ),
 /* NAV (Navigation)
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -270,7 +272,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |LCtrl |      |      |      |      |      |-------|    |-------|      |   _  |   +  |   {  |   }  |  |   |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | NAV  |LGUI| /SPC/SFT/       \Enter \  |SYMBO |MOUSE | FUNC |
+ *                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
  *                   |      |      |      |/      /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -279,7 +281,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, KC_UP, _______, _______, _______,                   WORD_LEFT, KC_UP, WORD_RIGHT, WORD_SELECT, WORD_DELETE, _______,
   KC_LSFT, KC_LEFT, KC_DOWN, KC_RGHT, S(KC_4), S(KC_5),                   KC_LEFT, KC_DOWN, KC_RGHT, _______, S(KC_9), S(KC_0),
   KC_LCTL, _______, _______, _______, _______, _______, _______, _______, XXXXXXX, S(KC_MINS), S(KC_EQL), S(KC_LBRC), S(KC_RBRC), S(KC_BSLS),
-                             KC_LALT, MO(_NAV), KC_LGUI, LT(_SHIFT, KC_SPC), KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
+                             KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -300,9 +302,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LSFT, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_4,    KC_5,    KC_6,    XXXXXXX, XXXXXXX,
   KC_LSFT, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,
   KC_LCTL, KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,   _______, _______, S(KC_EQL), KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
-                             KC_LALT, LT(_SYMBOLS, KC_LGUI), _______, LT(_SHIFT, KC_SPC), KC_ENT, _______, MO(_MOUSE), MO(_FUNCTION)
+                             KC_LALT, LT(_SYMBOLS, KC_LGUI), _______, KC_SPC, KC_ENT, _______, MO(_MOUSE), MO(_FUNCTION)
 ),
-/* EMOJI (Emojis mapped to QWERTY letter positions)
+/* EMOJI (Emojis mapped to QWERTY letter positions) - COMMENTED OUT TO SAVE MEMORY FOR SM_TD
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -316,13 +318,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
+/*
 [_EMOJI] = LAYOUT(
   TO(_QWERTY), _______, _______, _______, _______, _______,                    _______, _______, _______, _______, _______, _______,
   _______, _______, UM(WAVE), UM(EYES), UM(ROCKET), UM(THINK),                _______, _______, _______, UM(OK), UM(PRAY), _______,
   _______, _______, UM(SMILE), _______, UM(FIRE), UM(GRIN),                    UM(HEART), _______, UM(KISS), UM(LOVE), _______, _______,
   _______, _______, _______, UM(COFFEE), UM(COOL), UM(THMUP), _______, _______, UM(THMDN), UM(MUSIC), _______, UM(POINT), _______, _______,
-                             KC_LALT, MO(_NAV), KC_LGUI, LT(_SHIFT, KC_SPC), KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
+                             KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 )
+*/
 };
 
 layer_state_t layer_state_set_user(layer_state_t state) {
@@ -330,9 +334,30 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 void keyboard_post_init_user(void) {
-  // Set unicode input mode for macOS
-  set_unicode_input_mode(UNICODE_MODE_MACOS);
+  // Set unicode input mode for macOS - commented out since emoji functionality is disabled
+  // set_unicode_input_mode(UNICODE_MODE_MACOS);
 }
+
+// SM_TD Home Row Modifiers configuration - COMMENTED OUT
+// smtd_resolution on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
+//   switch (keycode) {
+//     // Left hand home row modifiers (ASDF)
+//     SMTD_MT(KC_A, KC_LSFT)  // A = Shift (pinky)
+//     SMTD_MT(KC_S, KC_LALT)  // S = Alt (ring finger)
+//     SMTD_MT(KC_D, KC_LCTL)  // D = Ctrl (middle finger)
+//     SMTD_MT(KC_F, KC_LGUI)  // F = Cmd (index finger)
+//     
+//     // Right hand home row modifiers (JKL;)
+//     SMTD_MT(KC_J, KC_RGUI)  // J = Cmd (index finger)
+//     SMTD_MT(KC_K, KC_RCTL)  // K = Ctrl (middle finger) 
+//     SMTD_MT(KC_L, KC_RALT)  // L = Alt (ring finger)
+//     SMTD_MT(KC_SCLN, KC_RSFT)  // ; = Shift (pinky)
+//     
+//     // Space bar layer-tap using SM_TD
+//     SMTD_LT(KC_SPC, _SHIFT)  // Space = tap for space, hold for SHIFT layer
+//   }
+//   return SMTD_RESOLUTION_UNHANDLED;
+// }
 
 // Combo processing function
 void process_combo_event(uint16_t combo_index, bool pressed) {
@@ -348,31 +373,22 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
   }
 }
 
-// Per-key tapping term configuration 
+// Per-key tapping term configuration - simplified since space is now handled by SM_TD
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        // Space bar shift layer can be more responsive
-        case LT(_SHIFT, KC_SPC):
-            return 150;  // Shorter for space bar layer-tap
-            
-        default:
-            return TAPPING_TERM;  // Default 200ms for everything else
-    }
+    return TAPPING_TERM;  // Default 200ms for everything
 }
 
-// Per-key hold on other key press configuration
+// Per-key hold on other key press configuration - simplified since space is now handled by SM_TD
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        // Disable for space layer-tap to prevent accidental layer activation
-        case LT(_SHIFT, KC_SPC):
-            return false; // Wait for full tapping term before deciding
-            
-        default:
-            return false; // Default behavior for other keys
-    }
+    return false; // Default behavior for all keys
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  // SM_TD processing commented out - not using home row modifiers
+  // if (!process_smtd(keycode, record)) {
+  //   return false;
+  // }
+  
   switch (keycode) {
     // Application navigation shortcuts
     case NAV_BACK:
@@ -631,6 +647,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       
+    // EMOJI_PICKER case commented out to save memory for SM_TD
+    /*
     case EMOJI_PICKER:
       {
         static uint16_t emoji_timer = 0;
@@ -661,6 +679,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
       }
+    */
   }
   
   if (record->event.pressed) {
@@ -697,7 +716,43 @@ bool oled_task_user(void) {
     
     oled_write_ln(read_keylogs(), false);
   } else {
-    oled_write(read_logo(), false);
+
+    static const char PROGMEM no_qmk[] = { 0xff, 0xff, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 
+      0x81, 0xc1, 0xc1, 0xe1, 0xe1, 0xc1, 0x81, 0x81, 0xc1, 0xe1, 0xe1, 0xc1, 0xc1, 0x81, 0x01, 0x01, 
+      0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 
+      0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x21, 
+      0x31, 0xf1, 0xf1, 0xb1, 0xa1, 0xb1, 0xf1, 0xf1, 0x31, 0x01, 0x01, 0xf1, 0xf1, 0x99, 0x99, 0x99, 
+      0xf1, 0xf1, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 
+      0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x81, 0xc1, 0xc1, 0xe1, 0x61, 0x31, 0x31, 
+      0x31, 0x31, 0x61, 0xc1, 0xc1, 0x81, 0x81, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0xff, 0xff, 
+      0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x18, 0xb8, 0x3c, 0xfc, 0xfc, 0xfc, 0xfc, 0x38, 0x30, 
+      0x33, 0xa7, 0x27, 0x0f, 0x9f, 0xdf, 0xc3, 0xc3, 0xdf, 0x1f, 0x0f, 0x27, 0xa7, 0x33, 0x30, 0x38, 
+      0xfc, 0xfc, 0xfc, 0xfc, 0x3c, 0x98, 0x18, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 
+      0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x48, 
+      0xc8, 0x6f, 0x2f, 0x0a, 0x0a, 0x0a, 0x6f, 0x2f, 0x08, 0x60, 0x60, 0x1f, 0x1f, 0x04, 0x24, 0x64, 
+      0x3f, 0x3f, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 
+      0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x05, 0x05, 0x65, 0x65, 0x64, 0x3c, 0x3d, 0x65, 0x65, 
+      0x65, 0x65, 0x6d, 0x3c, 0x3c, 0x65, 0x25, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 
+      0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x03, 0x07, 0x07, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0xe7, 0xf3, 
+      0xf3, 0xf9, 0xf9, 0xf8, 0xf9, 0xfb, 0xc3, 0xc3, 0xfb, 0xf8, 0xf8, 0xf9, 0xf9, 0xf3, 0xe3, 0xe7, 
+      0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x07, 0x03, 0x03, 0x00, 0x00, 0x00, 0x00, 0xfe, 0xfe, 0x00, 0x00, 
+      0x00, 0x7c, 0xfe, 0x86, 0x82, 0xc6, 0xc6, 0x44, 0x00, 0x00, 0xfe, 0xfe, 0x10, 0x10, 0x10, 0xfe, 
+      0xfe, 0x00, 0x00, 0x00, 0xfe, 0xfe, 0x00, 0x00, 0x7c, 0xfe, 0x86, 0x82, 0x92, 0xf6, 0x70, 0x00, 
+      0x00, 0x7c, 0xfe, 0x86, 0x82, 0x82, 0xfe, 0x7c, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfe, 0xfe, 0xfe, 
+      0x00, 0x7c, 0xfc, 0xfe, 0x82, 0x82, 0xc6, 0xc4, 0x40, 0x00, 0xfe, 0xfe, 0x30, 0x10, 0x10, 0xfe, 
+      0xfe, 0xfe, 0x00, 0x80, 0xfe, 0xfe, 0x92, 0x92, 0x92, 0x82, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 
+      0xff, 0xff, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x81, 
+      0x81, 0x83, 0x83, 0x83, 0x83, 0x81, 0x80, 0x80, 0x81, 0x83, 0x83, 0x83, 0x83, 0x81, 0x81, 0x80, 
+      0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 
+      0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 
+      0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 
+      0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 
+      0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 
+      0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0xff, 0xff};
+    oled_write_raw_P(no_qmk, sizeof(no_qmk));
+
+  
+      
   }
     return false;
 }

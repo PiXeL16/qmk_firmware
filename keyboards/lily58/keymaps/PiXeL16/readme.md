@@ -8,15 +8,12 @@ This isn't just another keymap – it's a complete keyboard personality system t
 
 ## 🎨 Visual Features
 
-### 🖥️ Rotating OLED Display System
-- **Dynamic Logo Rotation**: Automatically cycles every 30 minutes between:
-  - 🏷️ **PiXeL16 Logo**: Personal branding display
-  - 🍓 **Ichigo Logo**: Anime character art (128x32px)
-  - 🧠 **Mindset is All**: Inspirational philosophy display (32x128px)
-- **Custom Bitmap Graphics**: Hand-crafted pixel art logos
+### 🖥️ OLED Display System
+- **Ichigo Logo**: Beautiful anime character art display (128x32px)
+- **Custom Bitmap Graphics**: Hand-crafted pixel art logo
 - **Split Display Design**: 
   - **Left OLED**: Real-time layer icons, WPM tracking, keystroke history
-  - **Right OLED**: Rotating logo display with manual control
+  - **Right OLED**: Static Ichigo logo display
 
 ### 📊 Real-Time Information Display
 - **WPM Tracking**: Live typing speed monitoring
@@ -24,10 +21,10 @@ This isn't just another keymap – it's a complete keyboard personality system t
 - **Keystroke History**: Recent key combinations shown
 - **Layer Status**: Always know which layer is active
 
-## 🗂️ Layer System (9 Total Layers)
+## 🗂️ Layer System (8 Active Layers, 1 Commented Out)
 
 ### 0️⃣ **QWERTY** - Base Layer
-Standard QWERTY with optimized thumb cluster for efficient layer access
+Standard QWERTY with **regular home row keys** and optimized thumb cluster for efficient layer access
 
 ### 1️⃣ **SHIFT** - Shifted Characters  
 Top row symbols and shifted number row for efficient symbol input
@@ -76,9 +73,10 @@ Number row, function keys, and additional navigation
 
 ## 🔧 Advanced QMK Features
 
-### ⌨️ Smart Input Features
-- **Smart Space Layer**: Space key doubles as Shift layer access
-- **Layer-Tap Optimization**: `TAPPING_TERM 200` optimized for layer switching
+### ⌨️ Smart Input Features  
+- **Regular Home Row Keys**: All keys (A, S, D, F, J, K, L, ;) work as normal letters - no modifier delays
+- **Smart Space Layer**: Space key doubles as Shift layer access (tap for space, hold for SHIFT layer)
+- **Simple Layer-Tap**: Space bar uses standard QMK layer-tap functionality - fast and reliable
 - **Combo Detection**: Space+Enter combo triggers Cmd+Space
 
 ### 🌐 Unicode & International Support
@@ -135,34 +133,37 @@ qmk flash -kb lily58/rev1 -km PiXeL16
 ```
 
 ### Firmware Stats
-- **Size**: 28,550 / 28,672 bytes (99% used)
-- **Features**: All advanced QMK features enabled
+- **Size**: 27,984 / 28,672 bytes (97% used, 688 bytes free)
+- **Features**: Regular home row keys, space layer-tap, Ichigo OLED logo, combos, Spanish support
+- **Performance**: Fast typing with zero modifier delays, standard QMK layer-tap for space
 - **VIA Support**: Disabled to accommodate feature set
-- **Memory Optimization**: Carefully tuned for maximum functionality
+- **Memory Optimization**: Emoji functionality temporarily disabled to free up space
 
 ## ⚙️ Configuration Details
 
 ### Enabled Features
+- ✅ **Standard Home Row Keys**: Regular letter keys without modifier delays for fast, natural typing
 - ✅ **OLED Display**: Custom graphics and real-time info
 - ✅ **WPM Tracking**: Live typing speed monitoring  
 - ✅ **Unicode Support**: Full emoji and international character support
 - ✅ **Mouse Keys**: Complete mouse control from keyboard
 - ✅ **Extra Keys**: Media and system control
-- ✅ **Custom Layers**: 9 specialized layers
+- ✅ **Custom Layers**: 8 active specialized layers (emoji layer temporarily disabled)
+- ✅ **Combo Keys**: Space+Enter combo support
 
 ### Disabled Features
+- ❌ **Emoji Layer**: Temporarily disabled to accommodate SM_TD library (can be re-enabled)
 - ❌ **VIA Support**: Disabled to save memory for custom features
 - ❌ **RGB Lighting**: Focus on OLED displays
 - ❌ **Audio**: Prioritizing other features
 
 ## 🎨 Customization Options
 
-### OLED Display Timing
+### OLED Display Customization
 ```c
-// In rotating_display_reader.c
-#define ROTATION_INTERVAL_MS 1800000  // 30 minutes
-// Change to 3600000 for 1 hour rotation
-// Change to 10000 for 10-second testing
+// In keyboards/lily58/lib/logo_reader.c
+// Replace the ichigo bitmap array with your own 128x32px bitmap data
+static char logo[] = { /* your bitmap data here */ };
 ```
 
 ### Layer-Tap Configuration
@@ -178,8 +179,20 @@ qmk flash -kb lily58/rev1 -km PiXeL16
 #define COMBO_TERM 50                 // 50ms window to press both keys
 ```
 
-### Manual Display Rotation
-Press the `ROTATE_DISPLAY` key (available in function layer) to manually cycle through logos.
+### Layer-Tap Configuration
+```c
+// In keymap.c - Space bar layer-tap setup:
+LT(_SHIFT, KC_SPC)  // Space = tap for space, hold for SHIFT layer
+
+// Standard QMK tapping term (in config.h):
+#define TAPPING_TERM 200   // 200ms hold time for layer access
+```
+
+### ~~Home Row Modifiers~~ - Removed for Better Typing Experience
+Home row modifiers have been removed to eliminate typing delays. All keys (A, S, D, F, J, K, L, ;) now work as regular letters with instant response.
+
+### Custom Logo Setup
+To change the OLED logo, convert your 128x32px image to a bitmap array and replace the data in `keyboards/lily58/lib/logo_reader.c`.
 
 ### Layer Icon Customization
 Edit `keyboards/lily58/lib/layer_icon_reader.c` to customize the ASCII art layer indicators.
@@ -196,11 +209,11 @@ Edit `keyboards/lily58/lib/layer_icon_reader.c` to customize the ASCII art layer
 ### Layer Access
 - **Primary**: Thumb keys for most-used layers (NAV, SYMBOLS, MOUSE, FUNCTION)
 - **Secondary**: Function layer triggers for specialty layers (EMOJI, SPANISH)
-- **Modifiers**: Traditional modifier keys (Ctrl, Alt, Shift, GUI) in standard positions
+- **Modifiers**: Standard left/right shift keys and layer access for all modifiers
 
 ### OLED Information
-- **Left Display**: Always shows current layer and typing stats
-- **Right Display**: Rotates between personal logos every 30 minutes
+- **Left Display**: Always shows current layer and typing stats  
+- **Right Display**: Shows the beautiful Ichigo logo
 - **Status Updates**: Real-time feedback on all layer changes
 
 ## 🧠 Philosophy
@@ -216,6 +229,7 @@ This keymap embodies the concept that your keyboard should be an extension of yo
 ## 🌟 Inspiration & References
 
 This keymap was heavily inspired by advanced QMK techniques from:
+- [SM_TD Library](https://github.com/stasmarkin/sm_td) - Revolutionary home row modifier implementation
 - [My Personalised Keyboard](https://leanrada.com/notes/my-personalised-keyboard/) - Advanced layer design and customization concepts
 - **Personal Workflow Needs**: Spanish input, programming efficiency, visual personalization
 - **Community QMK Examples**: Best practices from the QMK community

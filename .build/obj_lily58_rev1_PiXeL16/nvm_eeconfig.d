@@ -11,10 +11,7 @@
  quantum/compiler_support.h quantum/eeconfig.h quantum/util.h \
  quantum/bits.h platforms/avr/_util.h quantum/logging/debug.h \
  quantum/logging/print.h quantum/logging/sendchar.h platforms/eeprom.h \
- quantum/keycode_config.h quantum/compiler_support.h \
- quantum/unicode/unicode.h quantum/unicode/unicode_keycodes.h \
- quantum/quantum_keycodes.h quantum/keymap_extras/keymap_us.h \
- quantum/sequencer/sequencer.h quantum/quantum_keycodes_legacy.h
+ quantum/keycode_config.h quantum/compiler_support.h
 
 keyboards/lily58/config.h:
 
@@ -71,15 +68,3 @@ platforms/eeprom.h:
 quantum/keycode_config.h:
 
 quantum/compiler_support.h:
-
-quantum/unicode/unicode.h:
-
-quantum/unicode/unicode_keycodes.h:
-
-quantum/quantum_keycodes.h:
-
-quantum/keymap_extras/keymap_us.h:
-
-quantum/sequencer/sequencer.h:
-
-quantum/quantum_keycodes_legacy.h:

@@ -29,6 +29,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Combo configuration
 #define COMBO_TERM 50                        // 50ms window to press both keys for combo
 
+// SM_TD (Home Row Modifiers) configuration - COMMENTED OUT (not using home row modifiers)
+// #define MAX_DEFERRED_EXECUTORS 10            // Required for SM_TD library
+// #define SMTD_TIMEOUT_RELEASE 5               // If false holds during fast typing, decrease this
+
 // Unicode settings for emoji layer (using UNICODEMAP instead)
 // #define UNICODE_SELECTED_MODES UC_MAC
 
