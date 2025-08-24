@@ -66,15 +66,7 @@ enum custom_keycodes {
   ES_IQUEST       // ¿ (alt+shift+?)
 };
 
-// Tap Dance definitions
-enum {
-  TD_A_ACCENT = 0,
-  TD_E_ACCENT,
-  TD_I_ACCENT,
-  TD_O_ACCENT,
-  TD_U_ACCENT,
-  TD_N_ENYE
-};
+// Tap dance definitions removed
 
 // Combo definitions
 enum combo_events {
@@ -90,82 +82,9 @@ combo_t key_combos[] = {
   [SPACE_ENTER_COMBO] = COMBO(space_enter_combo, KC_NO), // KC_NO means we handle it in process_combo_event
 };
 
-// Tap dance functions
-void td_a_accent(tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    tap_code(KC_A);
-  } else if (state->count == 2) {
-    register_code(KC_LALT);
-    tap_code(KC_E);
-    unregister_code(KC_LALT);
-    tap_code(KC_A);
-  }
-}
+// Tap dance functions removed - using Spanish layer instead
 
-void td_e_accent(tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    tap_code(KC_E);
-  } else if (state->count == 2) {
-    register_code(KC_LALT);
-    tap_code(KC_E);
-    unregister_code(KC_LALT);
-    tap_code(KC_E);
-  }
-}
-
-void td_i_accent(tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    tap_code(KC_I);
-  } else if (state->count == 2) {
-    register_code(KC_LALT);
-    tap_code(KC_E);
-    unregister_code(KC_LALT);
-    tap_code(KC_I);
-  }
-}
-
-void td_o_accent(tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    tap_code(KC_O);
-  } else if (state->count == 2) {
-    register_code(KC_LALT);
-    tap_code(KC_E);
-    unregister_code(KC_LALT);
-    tap_code(KC_O);
-  }
-}
-
-void td_u_accent(tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    tap_code(KC_U);
-  } else if (state->count == 2) {
-    register_code(KC_LALT);
-    tap_code(KC_E);
-    unregister_code(KC_LALT);
-    tap_code(KC_U);
-  }
-}
-
-void td_n_enye(tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    tap_code(KC_N);
-  } else if (state->count == 2) {
-    register_code(KC_LALT);
-    tap_code(KC_N);
-    unregister_code(KC_LALT);
-    tap_code(KC_N);
-  }
-}
-
-// Tap Dance actions
-tap_dance_action_t tap_dance_actions[] = {
-  [TD_A_ACCENT] = ACTION_TAP_DANCE_FN(td_a_accent),
-  [TD_E_ACCENT] = ACTION_TAP_DANCE_FN(td_e_accent),
-  [TD_I_ACCENT] = ACTION_TAP_DANCE_FN(td_i_accent),
-  [TD_O_ACCENT] = ACTION_TAP_DANCE_FN(td_o_accent),
-  [TD_U_ACCENT] = ACTION_TAP_DANCE_FN(td_u_accent),
-  [TD_N_ENYE] = ACTION_TAP_DANCE_FN(td_n_enye)
-};
+// Tap dance actions removed
 
 // Emoji unicode map - COMMENTED OUT TO SAVE MEMORY FOR SM_TD
 /*
@@ -244,9 +163,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
  [_QWERTY] = LAYOUT(
   KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-  KC_TAB,   KC_Q,   KC_W,    TD(TD_E_ACCENT),    KC_R,    KC_T,                     KC_Y,    TD(TD_U_ACCENT),    TD(TD_I_ACCENT),    TD(TD_O_ACCENT),    KC_P,    KC_MINS,
-  KC_LCTL,  TD(TD_A_ACCENT), KC_S, KC_D, KC_F, KC_G,                   KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  TD(TD_N_ENYE),    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
+  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
+  KC_LCTL,  KC_A, KC_S, KC_D, KC_F, KC_G,                   KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
                         KC_LALT, MO(_NAV), KC_LGUI, LT(_SHIFT, KC_SPC), KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
 /* SHIFT
@@ -265,9 +184,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_SHIFT] = LAYOUT(
   KC_ESC,   KC_TILD, KC_AT,   KC_HASH, KC_PERC, _______,                   KC_CIRC, KC_AMPR, KC_PIPE, KC_BSLS, _______, KC_BSPC,
-  KC_EXLM,  S(KC_Q), S(KC_W), S(TD(TD_E_ACCENT)), S(KC_R), S(KC_T),                   S(KC_Y), S(TD(TD_U_ACCENT)), S(TD(TD_I_ACCENT)), S(TD(TD_O_ACCENT)), S(KC_P), KC_DQUO,
-  KC_TAB,   S(TD(TD_A_ACCENT)), S(KC_S), S(KC_D), S(KC_F), S(KC_G),                   S(KC_H), S(KC_J), S(KC_K), S(KC_L), KC_COLN, KC_QUOT,
-  KC_LSFT,  S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B), KC_LBRC, KC_RBRC, S(TD(TD_N_ENYE)), S(KC_M), KC_SCLN, KC_COLN, KC_ASTR, KC_RSFT,
+  KC_EXLM,  S(KC_Q), S(KC_W), S(KC_E), S(KC_R), S(KC_T),                   S(KC_Y), S(KC_U), S(KC_I), S(KC_O), S(KC_P), KC_DQUO,
+  KC_TAB,   S(KC_A), S(KC_S), S(KC_D), S(KC_F), S(KC_G),                   S(KC_H), S(KC_J), S(KC_K), S(KC_L), KC_COLN, KC_QUOT,
+  KC_LSFT,  S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B), KC_LBRC, KC_RBRC, S(KC_N), S(KC_M), KC_SCLN, KC_COLN, KC_ASTR, KC_RSFT,
                              KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
 /* SYMBOLS

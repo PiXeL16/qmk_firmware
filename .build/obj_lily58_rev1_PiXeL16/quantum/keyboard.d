@@ -17,8 +17,8 @@
  quantum/mousekey.h quantum/process_keycode/process_combo.h \
  quantum/quantum_keycodes.h quantum/keymap_extras/keymap_us.h \
  quantum/sequencer/sequencer.h quantum/quantum_keycodes_legacy.h \
- quantum/process_keycode/process_tap_dance.h drivers/oled/oled_driver.h \
- quantum/crc.h quantum/split_common/split_util.h quantum/wpm.h
+ drivers/oled/oled_driver.h quantum/crc.h \
+ quantum/split_common/split_util.h quantum/wpm.h
 
 keyboards/lily58/config.h:
 
@@ -105,8 +105,6 @@ quantum/keymap_extras/keymap_us.h:
 quantum/sequencer/sequencer.h:
 
 quantum/quantum_keycodes_legacy.h:
-
-quantum/process_keycode/process_tap_dance.h:
 
 drivers/oled/oled_driver.h:
 
