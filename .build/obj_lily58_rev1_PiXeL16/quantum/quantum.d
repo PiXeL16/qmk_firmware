@@ -21,6 +21,7 @@
  quantum/led.h quantum/action_util.h quantum/action_tapping.h \
  quantum/logging/print.h quantum/logging/sendchar.h \
  quantum/logging/debug.h platforms/suspend.h \
+ quantum/process_keycode/process_tap_dance.h \
  quantum/process_keycode/process_combo.h \
  quantum/process_keycode/process_space_cadet.h \
  quantum/send_string/send_string.h \
@@ -131,6 +132,8 @@ quantum/logging/sendchar.h:
 quantum/logging/debug.h:
 
 platforms/suspend.h:
+
+quantum/process_keycode/process_tap_dance.h:
 
 quantum/process_keycode/process_combo.h:
 

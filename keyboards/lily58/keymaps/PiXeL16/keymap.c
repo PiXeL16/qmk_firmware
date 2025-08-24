@@ -9,6 +9,8 @@
 // Function declarations
 void set_keylog(uint16_t keycode, keyrecord_t *record);
 
+// Removed Luna functionality to save space
+
 // Smart bracket state tracking
 static bool lprn_held = false;
 static bool lbrc_held = false;
@@ -54,11 +56,24 @@ enum custom_keycodes {
   SYM_RABK,      // Smart >
   // Spanish layer picker
   SPANISH_PICKER, // Spanish character picker
-  ES_A_ACCENT,    // á (dead key + a)
-  ES_E_ACCENT,    // é (dead key + e)  
-  ES_I_ACCENT,    // í (dead key + i)
-  ES_O_ACCENT,    // ó (dead key + o)
-  ES_U_ACCENT     // ú (dead key + u)
+  ES_A_ACCENT,    // á (alt+e, a)
+  ES_E_ACCENT,    // é (alt+e, e)  
+  ES_I_ACCENT,    // í (alt+e, i)
+  ES_O_ACCENT,    // ó (alt+e, o)
+  ES_U_ACCENT,    // ú (alt+e, u)
+  ES_ENYE,        // ñ (alt+n, n)
+  ES_IEXCL,       // ¡ (alt+1)
+  ES_IQUEST       // ¿ (alt+shift+?)
+};
+
+// Tap Dance definitions
+enum {
+  TD_A_ACCENT = 0,
+  TD_E_ACCENT,
+  TD_I_ACCENT,
+  TD_O_ACCENT,
+  TD_U_ACCENT,
+  TD_N_ENYE
 };
 
 // Combo definitions
@@ -73,6 +88,83 @@ const uint16_t PROGMEM space_enter_combo[] = {LT(_SHIFT, KC_SPC), KC_ENT, COMBO_
 // Map combos to their key combinations
 combo_t key_combos[] = {
   [SPACE_ENTER_COMBO] = COMBO(space_enter_combo, KC_NO), // KC_NO means we handle it in process_combo_event
+};
+
+// Tap dance functions
+void td_a_accent(tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    tap_code(KC_A);
+  } else if (state->count == 2) {
+    register_code(KC_LALT);
+    tap_code(KC_E);
+    unregister_code(KC_LALT);
+    tap_code(KC_A);
+  }
+}
+
+void td_e_accent(tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    tap_code(KC_E);
+  } else if (state->count == 2) {
+    register_code(KC_LALT);
+    tap_code(KC_E);
+    unregister_code(KC_LALT);
+    tap_code(KC_E);
+  }
+}
+
+void td_i_accent(tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    tap_code(KC_I);
+  } else if (state->count == 2) {
+    register_code(KC_LALT);
+    tap_code(KC_E);
+    unregister_code(KC_LALT);
+    tap_code(KC_I);
+  }
+}
+
+void td_o_accent(tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    tap_code(KC_O);
+  } else if (state->count == 2) {
+    register_code(KC_LALT);
+    tap_code(KC_E);
+    unregister_code(KC_LALT);
+    tap_code(KC_O);
+  }
+}
+
+void td_u_accent(tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    tap_code(KC_U);
+  } else if (state->count == 2) {
+    register_code(KC_LALT);
+    tap_code(KC_E);
+    unregister_code(KC_LALT);
+    tap_code(KC_U);
+  }
+}
+
+void td_n_enye(tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    tap_code(KC_N);
+  } else if (state->count == 2) {
+    register_code(KC_LALT);
+    tap_code(KC_N);
+    unregister_code(KC_LALT);
+    tap_code(KC_N);
+  }
+}
+
+// Tap Dance actions
+tap_dance_action_t tap_dance_actions[] = {
+  [TD_A_ACCENT] = ACTION_TAP_DANCE_FN(td_a_accent),
+  [TD_E_ACCENT] = ACTION_TAP_DANCE_FN(td_e_accent),
+  [TD_I_ACCENT] = ACTION_TAP_DANCE_FN(td_i_accent),
+  [TD_O_ACCENT] = ACTION_TAP_DANCE_FN(td_o_accent),
+  [TD_U_ACCENT] = ACTION_TAP_DANCE_FN(td_u_accent),
+  [TD_N_ENYE] = ACTION_TAP_DANCE_FN(td_n_enye)
 };
 
 // Emoji unicode map - COMMENTED OUT TO SAVE MEMORY FOR SM_TD
@@ -152,9 +244,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
  [_QWERTY] = LAYOUT(
   KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
-  KC_LCTL,  KC_A, KC_S, KC_D, KC_F, KC_G,                   KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
+  KC_TAB,   KC_Q,   KC_W,    TD(TD_E_ACCENT),    KC_R,    KC_T,                     KC_Y,    TD(TD_U_ACCENT),    TD(TD_I_ACCENT),    TD(TD_O_ACCENT),    KC_P,    KC_MINS,
+  KC_LCTL,  TD(TD_A_ACCENT), KC_S, KC_D, KC_F, KC_G,                   KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  TD(TD_N_ENYE),    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
                         KC_LALT, MO(_NAV), KC_LGUI, LT(_SHIFT, KC_SPC), KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
 /* SHIFT
@@ -173,9 +265,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_SHIFT] = LAYOUT(
   KC_ESC,   KC_TILD, KC_AT,   KC_HASH, KC_PERC, _______,                   KC_CIRC, KC_AMPR, KC_PIPE, KC_BSLS, _______, KC_BSPC,
-  KC_EXLM,  S(KC_Q), S(KC_W), S(KC_E), S(KC_R), S(KC_T),                   S(KC_Y), S(KC_U), S(KC_I), S(KC_O), S(KC_P), KC_DQUO,
-  KC_TAB,   S(KC_A), S(KC_S), S(KC_D), S(KC_F), S(KC_G),                   S(KC_H), S(KC_J), S(KC_K), S(KC_L), KC_COLN, KC_QUOT,
-  KC_LSFT,  S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B), KC_LBRC, KC_RBRC, S(KC_N), S(KC_M), KC_SCLN, KC_COLN, KC_ASTR, KC_RSFT,
+  KC_EXLM,  S(KC_Q), S(KC_W), S(TD(TD_E_ACCENT)), S(KC_R), S(KC_T),                   S(KC_Y), S(TD(TD_U_ACCENT)), S(TD(TD_I_ACCENT)), S(TD(TD_O_ACCENT)), S(KC_P), KC_DQUO,
+  KC_TAB,   S(TD(TD_A_ACCENT)), S(KC_S), S(KC_D), S(KC_F), S(KC_G),                   S(KC_H), S(KC_J), S(KC_K), S(KC_L), KC_COLN, KC_QUOT,
+  KC_LSFT,  S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B), KC_LBRC, KC_RBRC, S(TD(TD_N_ENYE)), S(KC_M), KC_SCLN, KC_COLN, KC_ASTR, KC_RSFT,
                              KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
 /* SYMBOLS
@@ -203,9 +295,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |   `  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | F11  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      | Span | Emoj |      |      |                    |      | Prev | Next | Play | Vol- | Vol+ |
+ * |      |      |      | Emoj |      |      |                    |      | Prev | Next | Play | Vol- | Vol+ |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------|      |      |      |      | BrDn | BrUp |
+ * |      |      | Span |      |      |      |-------.    ,-------|      |      |      |      | BrDn | BrUp |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -215,8 +307,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_FUNCTION] = LAYOUT(
   KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-  _______, _______, SPANISH_PICKER, /*EMOJI_PICKER*/ _______, _______, _______,       _______, KC_MPRV, KC_MNXT, KC_MPLY, KC_VOLD, KC_VOLU,
-  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, KC_BRMD, KC_BRMU, _______,
+  _______, _______, _______, /*EMOJI_PICKER*/ _______, _______, _______,       _______, KC_MPRV, KC_MNXT, KC_MPLY, KC_VOLD, KC_VOLU,
+  _______, _______, SPANISH_PICKER, _______, _______, _______,                   _______, _______, _______, KC_BRMD, KC_BRMU, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                              KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
@@ -236,9 +328,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_SPANISH] = LAYOUT(
   TO(_QWERTY), _______, _______, _______, _______, _______,              _______, _______, _______, _______, _______, _______,
-  ES_IEXL, _______, _______, ES_E_ACCENT, _______, _______,              _______, ES_U_ACCENT, ES_I_ACCENT, ES_O_ACCENT, _______, ES_IQUE,
+  ES_IEXCL, _______, _______, ES_E_ACCENT, _______, _______,              _______, ES_U_ACCENT, ES_I_ACCENT, ES_O_ACCENT, _______, ES_IQUEST,
   _______, ES_A_ACCENT, _______, _______, _______, _______,                  _______, _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, ES_NTIL, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, _______, _______, _______, ES_ENYE, _______, _______, _______, _______, _______,
                              KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
 /* MOUSE (Mouse Control)
@@ -247,7 +339,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      | WhUp |      |      |      |                    |      | MsUp |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      | LClk | WhDn | RClk |      |      |-------.    ,-------|MsLeft|MsDown|MsUp  |MsRght|      |      |
+ * |      | LClk | WhDn | RClk |      |      |-------.    ,-------|MsLeft|MsDown|MsRght|      |      |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      | MClk |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -258,7 +350,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_MOUSE] = LAYOUT(
   _______, _______, _______, _______, _______, _______,              _______, _______, _______, _______, _______, _______,
   _______, _______, KC_MS_WH_UP, _______, _______, _______,              _______, KC_MS_UP, _______, _______, _______, _______,
-  _______, KC_MS_BTN1, KC_MS_WH_DOWN, KC_MS_BTN2, _______, _______,      KC_MS_LEFT, KC_MS_DOWN, KC_MS_UP, KC_MS_RIGHT, _______, _______,
+  _______, KC_MS_BTN1, KC_MS_WH_DOWN, KC_MS_BTN2, _______, _______,      KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______, _______,_______,
   _______, _______, KC_MS_BTN3, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                              KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), _______, MO(_FUNCTION)
 ),
@@ -599,43 +691,83 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
 
-    // Spanish accented characters using dead keys
+    // Spanish accented characters using Alt+key combinations (macOS)
     case ES_A_ACCENT:
       if (record->event.pressed) {
-        tap_code(ES_ACUT);  // Dead key for acute accent
-        tap_code(KC_A);     // Then press A
+        register_code(KC_LALT);
+        tap_code(KC_E);  // Alt+E for acute accent
+        unregister_code(KC_LALT);
+        tap_code(KC_A);  // Then press A
         layer_off(_SPANISH);
       }
       return false;
       
     case ES_E_ACCENT:
       if (record->event.pressed) {
-        tap_code(ES_ACUT);  // Dead key for acute accent
-        tap_code(KC_E);     // Then press E
+        register_code(KC_LALT);
+        tap_code(KC_E);  // Alt+E for acute accent
+        unregister_code(KC_LALT);
+        tap_code(KC_E);  // Then press E
         layer_off(_SPANISH);
       }
       return false;
       
     case ES_I_ACCENT:
       if (record->event.pressed) {
-        tap_code(ES_ACUT);  // Dead key for acute accent
-        tap_code(KC_I);     // Then press I
+        register_code(KC_LALT);
+        tap_code(KC_E);  // Alt+E for acute accent
+        unregister_code(KC_LALT);
+        tap_code(KC_I);  // Then press I
         layer_off(_SPANISH);
       }
       return false;
       
     case ES_O_ACCENT:
       if (record->event.pressed) {
-        tap_code(ES_ACUT);  // Dead key for acute accent
-        tap_code(KC_O);     // Then press O
+        register_code(KC_LALT);
+        tap_code(KC_E);  // Alt+E for acute accent
+        unregister_code(KC_LALT);
+        tap_code(KC_O);  // Then press O
         layer_off(_SPANISH);
       }
       return false;
       
     case ES_U_ACCENT:
       if (record->event.pressed) {
-        tap_code(ES_ACUT);  // Dead key for acute accent
-        tap_code(KC_U);     // Then press U
+        register_code(KC_LALT);
+        tap_code(KC_E);  // Alt+E for acute accent
+        unregister_code(KC_LALT);
+        tap_code(KC_U);  // Then press U
+        layer_off(_SPANISH);
+      }
+      return false;
+
+    case ES_ENYE:  // ñ
+      if (record->event.pressed) {
+        register_code(KC_LALT);
+        tap_code(KC_N);  // Alt+N for tilde accent
+        unregister_code(KC_LALT);
+        tap_code(KC_N);  // Then press N
+        layer_off(_SPANISH);
+      }
+      return false;
+
+    case ES_IEXCL:  // ¡
+      if (record->event.pressed) {
+        register_code(KC_LALT);
+        tap_code(KC_1);  // Alt+1 for ¡
+        unregister_code(KC_LALT);
+        layer_off(_SPANISH);
+      }
+      return false;
+
+    case ES_IQUEST:  // ¿
+      if (record->event.pressed) {
+        register_code(KC_LALT);
+        register_code(KC_LSFT);
+        tap_code(KC_SLSH);  // Alt+Shift+? for ¿
+        unregister_code(KC_LSFT);
+        unregister_code(KC_LALT);
         layer_off(_SPANISH);
       }
       return false;
@@ -682,6 +814,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     */
   }
   
+  // Luna keyboard input detection removed
+  
   if (record->event.pressed) {
 #ifdef OLED_ENABLE
     set_keylog(keycode, record);
@@ -703,6 +837,18 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 const char *read_layer_state(void);
 const char *read_logo(void);
 const char *read_keylogs(void);
+
+// Luna animation frames removed to save firmware space
+
+// Walk frames removed
+
+// Run frames removed
+
+// Bark frames removed
+
+// Sneak frames removed
+
+// Luna rendering function removed to save space
 
 bool oled_task_user(void) {
   if (is_keyboard_master()) {
@@ -818,26 +964,31 @@ bool oled_task_user(void) {
       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     
-    // Array of image pointers for random selection
-    static const char* const images[] PROGMEM = {
-      pixel16_logo,
-      ichigo_logo,
-      third_logo
-    };
-    
     // Static variable to store selected image to avoid flickering
     static uint8_t selected_image = 0xFF;
     static uint32_t last_selection_time = 0;
     
-    // Select new image every 30 seconds or on first boot
+    // Select new image every 60 seconds or on first boot
     if (selected_image == 0xFF || timer_elapsed32(last_selection_time) > 60000) {
       selected_image = timer_read() % 3;  // Simple random selection between 0, 1, and 2
       last_selection_time = timer_read32();
     }
     
     // Display the selected image
-    const char* current_image = (const char*)pgm_read_ptr(&images[selected_image]);
-    oled_write_raw_P(current_image, sizeof(ichigo_logo));
+    switch(selected_image) {
+      case 0:
+        oled_write_raw_P(pixel16_logo, sizeof(pixel16_logo));
+        break;
+      case 1:
+        oled_write_raw_P(ichigo_logo, sizeof(ichigo_logo));
+        break;
+      case 2:
+        oled_write_raw_P(third_logo, sizeof(third_logo));
+        break;
+      default:
+        oled_write_raw_P(ichigo_logo, sizeof(ichigo_logo));
+        break;
+    }
 
   
       

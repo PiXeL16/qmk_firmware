@@ -20,6 +20,7 @@
  quantum/sequencer/sequencer.h quantum/quantum_keycodes_legacy.h \
  quantum/keycode_string.h platforms/bootloader.h quantum/sync_timer.h \
  platforms/atomic_util.h platforms/avr/atomic_util.h platforms/suspend.h \
+ quantum/process_keycode/process_tap_dance.h \
  quantum/process_keycode/process_combo.h \
  quantum/process_keycode/process_space_cadet.h \
  quantum/send_string/send_string.h \
@@ -133,6 +134,8 @@ platforms/atomic_util.h:
 platforms/avr/atomic_util.h:
 
 platforms/suspend.h:
+
+quantum/process_keycode/process_tap_dance.h:
 
 quantum/process_keycode/process_combo.h:
 

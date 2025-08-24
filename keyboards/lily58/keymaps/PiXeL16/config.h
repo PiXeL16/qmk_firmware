@@ -29,6 +29,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Combo configuration
 #define COMBO_TERM 150                       // 150ms window to press both keys for combo
 
+// Tap Dance configuration
+#define TAPPING_TERM_TAP_DANCE 275           // Slightly longer term for tap dance to allow triple taps
+
 // SM_TD (Home Row Modifiers) configuration - COMMENTED OUT (not using home row modifiers)
 // #define MAX_DEFERRED_EXECUTORS 10            // Required for SM_TD library
 // #define SMTD_TIMEOUT_RELEASE 5               // If false holds during fast typing, decrease this

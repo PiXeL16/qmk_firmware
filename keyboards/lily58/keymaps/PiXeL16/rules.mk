@@ -14,6 +14,7 @@ WPM_ENABLE = yes            # Words Per Minute calculation
 # UNICODEMAP_ENABLE = yes     # Unicode map for emojis (disabled to save memory for SM_TD)
 # UNICODE_ENABLE = yes        # Unicode support for Spanish characters (temporarily disabled)
 COMBO_ENABLE = yes          # Enable combo keys functionality
+TAP_DANCE_ENABLE = yes      # Enable tap dance functionality
 # DEFERRED_EXEC_ENABLE = yes  # Commented out - not using SM_TD (was required for SM_TD library)
 
 # If you want to change the display of OLED, you need to change here
