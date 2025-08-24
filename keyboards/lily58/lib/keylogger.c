@@ -41,5 +41,15 @@ const char *read_keylog(void) {
 }
 
 const char *read_keylogs(void) {
-  return keylogs_str;
+  // Return only the last key pressed instead of all keys
+  static char last_key_only[2] = {' ', '\0'};
+  
+  if (keylogs_str_idx > 0) {
+    last_key_only[0] = keylogs_str[keylogs_str_idx - 1];
+  } else if (keylogs_str_idx == 0 && keylogs_str[sizeof(keylogs_str) - 2] != ' ') {
+    // Handle wraparound case
+    last_key_only[0] = keylogs_str[sizeof(keylogs_str) - 2];
+  }
+  
+  return last_key_only;
 }

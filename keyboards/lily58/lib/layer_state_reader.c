@@ -20,34 +20,34 @@ const char *read_layer_state(void) {
   switch (current_layer)
   {
   case L_QWERTY:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: QWERTY");
+    snprintf(layer_state_str, sizeof(layer_state_str), "QWERTY");
     break;
   case L_SHIFT:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: SHIFT");
+    snprintf(layer_state_str, sizeof(layer_state_str), "SHIFT");
     break;
   case L_SYMBOLS:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: SYMBOLS");
+    snprintf(layer_state_str, sizeof(layer_state_str), "SYMBOLS");
     break;
   case L_NAV:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: NAV");
+    snprintf(layer_state_str, sizeof(layer_state_str), "NAV");
     break;
   case L_RAISE:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: RAISE");
+    snprintf(layer_state_str, sizeof(layer_state_str), "RAISE");
     break;
   case L_FUNCTION:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: FUNCTION");
+    snprintf(layer_state_str, sizeof(layer_state_str), "FUNCTION");
     break;
   case L_SPANISH:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: ESPAÑOL");
+    snprintf(layer_state_str, sizeof(layer_state_str), "ESPANOL");
     break;
   case L_MOUSE:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: MOUSE");
+    snprintf(layer_state_str, sizeof(layer_state_str), "MOUSE");
     break;
   case L_EMOJI:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: EMOJI");
+    snprintf(layer_state_str, sizeof(layer_state_str), "EMOJI");
     break;
   default:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Undef-%u", current_layer);
+    snprintf(layer_state_str, sizeof(layer_state_str), "Undef");
   }
 
   return layer_state_str;

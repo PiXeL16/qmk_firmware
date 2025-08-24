@@ -1,6 +1,6 @@
 LTO_ENABLE = yes            # Link Time Optimization enabled
 BOOTMAGIC_ENABLE = no       # Enable Bootmagic Lite
-MOUSEKEY_ENABLE = yes       # Mouse keys (for mouse layer)
+MOUSEKEY_ENABLE = yes       # Mouse keys enabled
 EXTRAKEY_ENABLE = yes       # Audio control and System control (for media keys)
 CONSOLE_ENABLE = no         # Console for debug
 COMMAND_ENABLE = no         # Commands for debug and configuration
