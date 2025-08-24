@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define QUICK_TAP_TERM 0                     // Disable quick tap for more consistent behavior
 
 // Combo configuration
-#define COMBO_TERM 50                        // 50ms window to press both keys for combo
+#define COMBO_TERM 150                       // 150ms window to press both keys for combo
 
 // SM_TD (Home Row Modifiers) configuration - COMMENTED OUT (not using home row modifiers)
 // #define MAX_DEFERRED_EXECUTORS 10            // Required for SM_TD library

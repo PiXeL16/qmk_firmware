@@ -23,11 +23,29 @@
      "Y88P"
 *******************************************************************************/
 
-#pragma once
+#include QMK_KEYBOARD_H
 
-#define QMK_VERSION "0.29.12-9-gc2ee56-dirty"
-#define QMK_BUILDDATE "2025-08-24-12:57:03"
-#define QMK_GIT_HASH  "c2ee566acb*"
-#define CHIBIOS_VERSION "8bd61b"
-#define CHIBIOS_CONTRIB_VERSION "develop_2021_q3-533-g3ac181"
+#ifdef MATRIX_MASKED
+__attribute__((weak)) const matrix_row_t matrix_mask[] = {
+    0b111111,
+    0b111111,
+    0b111111,
+    0b111111,
+    0b111110,
+    0b111111,
+    0b111111,
+    0b111111,
+    0b111111,
+    0b111110,
+};
+#endif
 
+#ifdef CHORDAL_HOLD
+__attribute__((weak)) const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = LAYOUT(
+  'L', 'L', 'L', 'L', 'L', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 
+  'L', 'L', 'L', 'L', 'L', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 
+  'L', 'L', 'L', 'L', 'L', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 
+  'L', 'L', 'L', 'L', 'L', 'L', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 
+  'L', 'L', 'L', 'L', 'R', 'R', 'R', 'R'
+);
+#endif

@@ -24,10 +24,15 @@
 *******************************************************************************/
 
 #pragma once
+#include <stdint.h>
+#include <stdbool.h>
+#include <keycodes.h>
 
-#define QMK_VERSION "0.29.12-9-gc2ee56-dirty"
-#define QMK_BUILDDATE "2025-08-24-12:57:03"
-#define QMK_GIT_HASH  "c2ee566acb*"
-#define CHIBIOS_VERSION "8bd61b"
-#define CHIBIOS_CONTRIB_VERSION "develop_2021_q3-533-g3ac181"
+#include "compiler_support.h"
+
+#define COMMUNITY_MODULES_API_VERSION_BUILDER(ver_major,ver_minor,ver_patch) (((((uint32_t)(ver_major))&0xFF) << 24) | ((((uint32_t)(ver_minor))&0xFF) << 16) | (((uint32_t)(ver_patch))&0xFF))
+#define COMMUNITY_MODULES_API_VERSION COMMUNITY_MODULES_API_VERSION_BUILDER(1,1,1)
+#define ASSERT_COMMUNITY_MODULES_MIN_API_VERSION(ver_major,ver_minor,ver_patch) STATIC_ASSERT(COMMUNITY_MODULES_API_VERSION_BUILDER(ver_major,ver_minor,ver_patch) <= COMMUNITY_MODULES_API_VERSION, "Community module requires a newer version of QMK modules API -- needs: " #ver_major "." #ver_minor "." #ver_patch ", current: 1.1.1.")
+
+typedef struct keyrecord_t keyrecord_t; // forward declaration so we don't need to include quantum.h
 
