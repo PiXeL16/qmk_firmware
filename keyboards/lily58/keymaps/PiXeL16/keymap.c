@@ -9,6 +9,26 @@
 // Function declarations
 void set_keylog(uint16_t keycode, keyrecord_t *record);
 
+// Motivational messages for high WPM
+static const char* motivational_messages[] = {
+    "You sexy beast!",
+    "You are on fire!",
+    "Unstoppable!",
+    "Speed demon!",
+    "Beast mode: ON",
+    "Crushing it!",
+    "Blazing fast!",
+    "Fingers of fury!",
+    "RAMPAGE!",
+    "DOMINATING!"
+};
+
+// WPM motivation tracking
+static bool show_motivational_msg = false;
+static uint32_t motivational_msg_timer = 0;
+static uint8_t current_message_index = 0;
+static bool was_above_90_wpm = false;
+
 // Removed Luna functionality to save space
 
 // Smart bracket state tracking
@@ -732,7 +752,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     */
   }
   
-  // Luna keyboard input detection removed
   
   if (record->event.pressed) {
 #ifdef OLED_ENABLE
@@ -1053,6 +1072,30 @@ void draw_bongocat(void) {
     }
 }
 
+void update_motivational_message(void) {
+    uint8_t current_wpm = get_current_wpm();
+    uint32_t current_time = timer_read32();
+    
+    // Check if WPM crosses the 90 threshold
+    if (current_wpm >= 90 && !was_above_90_wpm) {
+        // Just crossed above 90 WPM - show new message
+        was_above_90_wpm = true;
+        show_motivational_msg = true;
+        motivational_msg_timer = current_time;
+        
+        // Select a random message (using timer as pseudo-random seed)
+        current_message_index = (current_time / 1000) % (sizeof(motivational_messages) / sizeof(motivational_messages[0]));
+    } else if (current_wpm < 90 && was_above_90_wpm) {
+        // Dropped below 90 WPM
+        was_above_90_wpm = false;
+    }
+    
+    // Hide message after 3 seconds
+    if (show_motivational_msg && timer_elapsed32(motivational_msg_timer) > 3000) {
+        show_motivational_msg = false;
+    }
+}
+
 // When you add source files to SRC in rules.mk, you can use functions.
 const char *read_layer_state(void);
 const char *read_logo(void);
@@ -1061,14 +1104,24 @@ const char *read_keylogs(void);
 
 bool oled_task_user(void) {
   if (is_keyboard_master()) {
-    // Left OLED - Simple display: layer, WPM, keylog
+    // Left OLED - Simple display: layer, WPM, keylog, motivational messages
+    
+    // Update motivational message state
+    update_motivational_message();
+    
     oled_write_ln(read_layer_state(), false);
     
     char wpm_str[32];
     sprintf(wpm_str, "WPM:%03d", get_current_wpm());
     oled_write_ln(wpm_str, false);
     
-    oled_write_ln(read_keylogs(), false);
+    // Show motivational message if active, otherwise show keylogs
+    if (show_motivational_msg) {
+      oled_write("", false); // Empty line for spacing
+      oled_write_ln(motivational_messages[current_message_index], true); // Inverted text for emphasis
+    } else {
+      oled_write_ln(read_keylogs(), false);
+    }
   } else {
     // Right OLED - Rotating Images (restored original functionality)
     // Define multiple images for right OLED

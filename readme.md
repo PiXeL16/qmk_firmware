@@ -27,38 +27,11 @@ You can request changes by making a fork and opening a [pull request](https://gi
 
 The project also includes community support for [lots of other keyboards](/keyboards/).
 
-## 🌟 Featured Custom Keymaps
+## Custom Keymaps
 
-This repository showcases advanced QMK implementations pushing the boundaries of keyboard customization:
+This fork includes advanced custom keymap configurations:
 
-### 🎹 [Lily58 - PiXeL16 Keymap](/keyboards/lily58/keymaps/PiXeL16/) 
-**A masterclass in QMK customization featuring:**
-
-🎨 **Visual Excellence**
-- **Rotating OLED Logo System**: Three custom bitmap displays (PiXeL16, Ichigo, Mindset is All) with 30-minute auto-rotation
-- **Real-Time WPM Tracking**: Live typing speed monitoring with OLED display integration
-- **Custom Layer Icons**: Unique ASCII art indicators for all 9 layers
-- **Split Display Design**: Dedicated information and branding screens
-
-⌨️ **Advanced Input Features**  
-- **9 Specialized Layers**: QWERTY, SHIFT, SYMBOLS, NAV, RAISE, FUNCTION, EMOJI, SPANISH, MOUSE
-- **Smart Bracket System**: Auto-positioning for `()`, `[]`, `{}`, `<>` with intelligent cursor management
-- **Word Navigation Macros**: Professional-grade text editing with word select/delete functionality
-- **Home Row Modifiers**: Shift, Cmd, Alt, Ctrl integrated into natural typing flow
-
-🌐 **International & Productivity**
-- **Unicode Emoji Support**: One-shot emoji layer with intuitive letter-to-emoji mappings
-- **Spanish Character Input**: Complete accented character support (á, é, í, ó, ú, ñ, ¡, ¿)
-- **Mouse Layer**: Full mouse control including movement, clicks, and scroll
-- **Symmetric Arrow Navigation**: Arrows accessible from both hands for maximum efficiency
-
-🔧 **Technical Excellence**
-- **985+ Lines of Custom Code**: Extensive QMK feature implementation
-- **Memory Optimized**: 99% firmware utilization (28,550/28,672 bytes)
-- **macOS Integration**: Native workspace navigation and system picker integration
-- **Zero Compromise**: All features working simultaneously without conflicts
-
-This keymap demonstrates the full potential of QMK firmware, combining aesthetic personalization with productivity-focused functionality. Every feature is carefully crafted to enhance the typing experience while maintaining muscle memory and efficiency.
+* **[Lily58 - PiXeL16 Keymap](/keyboards/lily58/keymaps/PiXeL16/)** - Advanced QMK features including home row modifiers, smart brackets, emoji layer, and navigation shortcuts inspired by modern keyboard customization techniques.
 
 ## Maintainers
 
