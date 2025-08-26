@@ -1,10 +1,9 @@
-.build/obj_lily58_rev1_PiXeL16/quantum/keymap_introspection.o: \
- quantum/keymap_introspection.c keyboards/lily58/config.h \
+.build/obj_lily58_rev1_PiXeL16/oled_images.o: \
+ keyboards/lily58/keymaps/PiXeL16/oled_images.c keyboards/lily58/config.h \
  .build/obj_lily58_rev1_PiXeL16/src/info_config.h \
  keyboards/lily58/keymaps/PiXeL16/config.h \
  quantum/split_common/post_config.h \
- keyboards/lily58/keymaps/PiXeL16/keymap.c \
- .build/obj_lily58_rev1_PiXeL16/src/default_keyboard.h quantum/quantum.h \
+ keyboards/lily58/keymaps/PiXeL16/oled_images.h quantum/quantum.h \
  platforms/avr/platform_deps.h platforms/wait.h platforms/avr/_wait.h \
  quantum/matrix.h platforms/gpio.h platforms/pin_defs.h \
  platforms/avr/_pin_defs.h platforms/avr/gpio.h \
@@ -27,11 +26,7 @@
  quantum/process_keycode/process_space_cadet.h \
  quantum/send_string/send_string.h \
  quantum/send_string/send_string_keycodes.h drivers/oled/oled_driver.h \
- quantum/wpm.h quantum/mousekey.h quantum/keymap_extras/keymap_spanish.h \
- keyboards/lily58/keymaps/PiXeL16/motivational_messages.h \
- keyboards/lily58/keymaps/PiXeL16/oled_images.h \
- keyboards/lily58/keymaps/PiXeL16/bongocat_animation.h \
- quantum/keymap_introspection.h
+ quantum/wpm.h quantum/mousekey.h
 
 keyboards/lily58/config.h:
 
@@ -41,9 +36,7 @@ keyboards/lily58/keymaps/PiXeL16/config.h:
 
 quantum/split_common/post_config.h:
 
-keyboards/lily58/keymaps/PiXeL16/keymap.c:
-
-.build/obj_lily58_rev1_PiXeL16/src/default_keyboard.h:
+keyboards/lily58/keymaps/PiXeL16/oled_images.h:
 
 quantum/quantum.h:
 
@@ -152,13 +145,3 @@ drivers/oled/oled_driver.h:
 quantum/wpm.h:
 
 quantum/mousekey.h:
-
-quantum/keymap_extras/keymap_spanish.h:
-
-keyboards/lily58/keymaps/PiXeL16/motivational_messages.h:
-
-keyboards/lily58/keymaps/PiXeL16/oled_images.h:
-
-keyboards/lily58/keymaps/PiXeL16/bongocat_animation.h:
-
-quantum/keymap_introspection.h:

@@ -1,249 +1,319 @@
-# 🎹 PiXeL16 Keymap for Lily58
+# 🎹 PiXeL16 - Advanced QMK Keymap for Lily58
 
-A **comprehensive, feature-rich QMK keymap** for the Lily58 keyboard featuring 9 custom layers, rotating OLED displays, WPM tracking, and extensive personalization.
+[![QMK](https://img.shields.io/badge/QMK-firmware-blue.svg)](https://qmk.fm/)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-## ✨ Overview
+A **comprehensive, modular QMK keymap** for the Lily58 keyboard featuring motivational WPM messages, rotating OLED displays, advanced layer system, and clean modular architecture for easy customization.
 
-This isn't just another keymap – it's a complete keyboard personality system that adapts to your workflow with intelligent layers, beautiful visuals, and productivity-focused features.
+## ✨ Key Features
 
-## 🎨 Visual Features
+### 🚀 Because it's not easy to re-learn how to type
+- **Digital Participation Trophy**: Hit 90 WPM and your keyboard will shower you with praise because clearly human approval wasn't enough
+- **Professionally Questionable Compliments**: Nothing says "serious developer" like your mechanical keyboard calling you a "Sexy beast!" during standup meetings
+- **Brief Moment of Glory**: Enjoy 3 whole seconds of artificial confidence before reality kicks back in and you're just a person typing again
 
-### 🖥️ OLED Display System
-- **Ichigo Logo**: Beautiful anime character art display (128x32px)
-- **Custom Bitmap Graphics**: Hand-crafted pixel art logo
-- **Split Display Design**: 
-  - **Left OLED**: Real-time layer icons, WPM tracking, keystroke history
-  - **Right OLED**: Static Ichigo logo display
+### 🖥️ Dynamic OLED Display System
+- **Left OLED**: Layer status, real-time WPM tracking, keystroke history, motivational messages
+- **Right OLED**: Rotating display system featuring:
+  - Three customs artwork.
+  - Animated bongocat that responds to typing activity
+- **60-Second Rotation**: Automatically cycles through all display modes
 
-### 📊 Real-Time Information Display
-- **WPM Tracking**: Live typing speed monitoring
-- **Custom Layer Icons**: Visual ASCII art for each layer
-- **Keystroke History**: Recent key combinations shown
-- **Layer Status**: Always know which layer is active
+### ⌨️ Advanced Layer System
+- **9 Specialized Layers**: QWERTY, Shift, Symbols, Navigation, Raise, Function, Spanish, Mouse
+- **Smart Space Layer**: Space key doubles as Shift layer access (tap/hold)
+- **Combo Support**: Space+Enter triggers Cmd+Space (Spotlight)
+- **Intelligent Navigation**: Word-level text manipulation, workspace control
 
-## 🗂️ Layer System (8 Active Layers, 1 Commented Out)
+### 🌐 Multilingual Support
+- **Spanish Characters**: Complete accent support (á, é, í, ó, ú, ñ)
+- **Spanish Punctuation**: ¡ ¿ symbols with proper input methods
+- **One-Shot Layer**: Type accent and automatically return to base layer
 
-### 0️⃣ **QWERTY** - Base Layer
-Standard QWERTY with **regular home row keys** and optimized thumb cluster for efficient layer access
+### 🎯 Smart Programming Features
+- **Intelligent Brackets**: Auto-cursor positioning for (), [], {}, <>
+- **Programming Symbols**: All essential coding characters optimally placed
+- **Word Navigation**: Professional text editing with select/delete word macros
 
-### 1️⃣ **SHIFT** - Shifted Characters  
-Top row symbols and shifted number row for efficient symbol input
+## 🏗️ Modular Architecture
 
-### 2️⃣ **SYMBOLS** - Programming Layer
-- **Smart Brackets**: Auto-positioning for `()`, `[]`, `{}`, `<>`
-- **Programming Symbols**: All essential coding characters
-- **Cursor Management**: Intelligent bracket cursor placement
-
-### 3️⃣ **NAV** - Navigation Layer
-- **Symmetric Arrow Navigation**: Arrows accessible from both hands
-- **Application Navigation**: Back/Forward, Tab switching
-- **Workspace Control**: macOS Mission Control integration
-- **Word Navigation**: Advanced text manipulation:
-  - **Word Left/Right**: Option+Arrow navigation
-  - **Word Select**: Intelligent word selection macro
-  - **Word Delete**: Select + delete word functionality
-
-### 4️⃣ **RAISE** - Numbers & F-Keys
-Number row, function keys, and additional navigation
-
-### 5️⃣ **FUNCTION** - System Control
-- **Function Keys**: F1-F12 in logical arrangement
-- **Media Controls**: Previous, play/pause, next, volume
-- **Brightness**: Display brightness controls
-- **System Integration**: 
-  - **Emoji Picker**: Single tap for one-shot layer, double tap for system picker
-  - **Spanish Picker**: Quick access to Spanish characters
-
-### 6️⃣ **EMOJI** - One-Shot Emoji Layer
-- **Letter-to-Emoji Mapping**: Intuitive emoji selection
-- **Arrow Symbols**: Unicode arrows matching navigation layer
-- **Smart Typography**: Curly quotes, apostrophes
-- **Instant Access**: One-shot layer with automatic return
-
-### 7️⃣ **SPANISH** - Accented Characters
-- **Complete Spanish Support**: á, é, í, ó, ú, ñ
-- **Spanish Punctuation**: ¡, ¿ symbols
-- **One-Shot Behavior**: Type accent, automatically return to base layer
-
-### 8️⃣ **MOUSE** - Mouse Control Layer
-- **Mouse Movement**: WASD-style mouse control
-- **Click Controls**: Left, right, middle click
-- **Scroll Wheel**: Vertical scrolling
-- **Precision Control**: Fine mouse movement from keyboard
-
-## 🔧 Advanced QMK Features
-
-### ⌨️ Smart Input Features  
-- **Regular Home Row Keys**: All keys (A, S, D, F, J, K, L, ;) work as normal letters - no modifier delays
-- **Smart Space Layer**: Space key doubles as Shift layer access (tap for space, hold for SHIFT layer)
-- **Simple Layer-Tap**: Space bar uses standard QMK layer-tap functionality - fast and reliable
-- **Combo Detection**: Space+Enter combo triggers Cmd+Space
-
-### 🌐 Unicode & International Support
-- **macOS Unicode Mode**: Full emoji and special character support
-- **Spanish Character Input**: Native accented character support
-- **Smart Typography**: Proper curly quotes and apostrophes
-- **Emoji Picker Integration**: Both custom layer and system picker access
-
-### 🎯 Productivity Enhancements
-- **Word Navigation Macros**: Professional-grade text editing
-- **Application Shortcuts**: Browser navigation, tab management
-- **Workspace Management**: macOS Spaces integration
-- **Smart Bracket System**: Automatic cursor positioning for all bracket types
-
-## 📁 File Structure
+This keymap uses a **clean, maintainable modular structure** that separates concerns for easy customization:
 
 ```
 keyboards/lily58/keymaps/PiXeL16/
-├── keymap.c              # Main keymap definition (985+ lines)
-├── rules.mk              # Feature configuration
-├── config.h              # QMK configuration
-├── readme.md             # This documentation
-└── oled/
-    └── images/           # Source logo images
-        ├── pixel16_logo.png
-        ├── ichigo.png
-        └── mindset_is_all.png
-
-keyboards/lily58/lib/
-├── layer_icon_reader.c       # Custom layer icons
-├── rotating_display_reader.c # Logo rotation system
-├── custom_logo_reader.c      # Original logo support
-├── layer_state_reader.c      # Layer status display
-├── keylogger.c              # Keystroke history
-└── wpm_reader.c             # WPM calculation
+├── keymap.c                    # Main keymap and layer definitions
+├── config.h                    # QMK configuration settings
+├── rules.mk                    # Feature flags and build configuration
+├── readme.md                   # This documentation
+│
+├── motivational_messages.h     # WPM motivation system interface
+├── motivational_messages.c     # WPM tracking and message logic
+│
+├── oled_images.h              # OLED display system interface  
+├── oled_images.c              # Image rotation and display logic
+│
+├── bongocat_animation.h       # Bongocat animation interface
+├── bongocat_animation.c       # Animation data and state management
+│
+└── oled/images/               # Source artwork files
+    ├── ichigo.png
+    ├── pixel16_logo.png
+    └── mindset_is_all.png
 ```
 
-## 🚀 Compilation & Setup
+### Supporting Libraries (keyboards/lily58/lib/)
+```
+lib/
+├── layer_state_reader.c       # Layer status display
+├── keylogger.c               # Keystroke history tracking  
+├── rgb_state_reader.c        # RGB status (if enabled)
+```
+
+## 📋 Detailed Layer Layouts
+
+The Lily58 has a split ergonomic design with 6×4+4 key matrix per side. Here are all the layer layouts:
+
+### 0️⃣ **QWERTY** - Base Layer
+```
+ ,-----------------------------------------.                    ,-----------------------------------------.
+ | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |BackSP|
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ |LCTRL |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
+ |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
+ |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
+ `-----------------------------------------/       /     \      \-----------------------------------------'
+                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
+                   |      |      |    |/SHIFT/           \      \ |      |      |      |
+                   `----------------------------'           '------''--------------------'
+```
+**Key Features**: Standard QWERTY with smart Space/Shift layer-tap functionality
+
+### 1️⃣ **SHIFT** - Shifted Characters Layer
+```
+ ,-----------------------------------------.                    ,-----------------------------------------.
+ | ESC  |   ~  |   @  |   #  |   %  |      |                    |   ^  |   &  |   |  |   \  |      |BackSP|
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ |   !  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |   "  |
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ | Tab  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   :  |  '   |
+ |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
+ |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ;  |   :  |   *  |RShift|
+ `-----------------------------------------/       /     \      \-----------------------------------------'
+                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
+                   |      |      |    |/      /         \      \ |      |      |      |
+                   `----------------------------'           '------''--------------------'
+```
+**Key Features**: Shifted numbers, symbols, and characters for quick symbol access
+
+### 2️⃣ **SYMBOLS** - Programming Layer
+```
+ ,-----------------------------------------.                    ,-----------------------------------------.
+ |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ |  `   |  \   |  $   |  {   |  }   |      |                    |      |      |      |      |      |      |
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ |  <   |  =   |  -   |  (   |  )   |  >   |-------.    ,-------|  ^   |  \   |  %   |  ↑   |      |      |
+ |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ |      |      |      |  [   |  ]   |  +   |-------|    |-------|      |   _  |      |      |      |      |
+ `-----------------------------------------/       /     \      \-----------------------------------------'
+                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |▓▓▓▓▓ |MOUSE | FUNC |
+                   |      |      |    |/      /         \      \ |▓▓▓▓▓ |      |      |
+                   `----------------------------'           '------''--------------------'
+```
+**Key Features**: Smart brackets with auto-cursor positioning, essential coding symbols
+
+### 3️⃣ **NAV** - Navigation Layer  
+```
+ ,-----------------------------------------.                    ,-----------------------------------------.
+ |      | Back | Fwd  |TbPrv |TbNxt |      |                    |WS←   |WS→   |WS↑   |WS↓   |      |      |
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ |      |      |  Up  |      |      |      |                    |WLeft | WUp  |WRight|WSel  |WDel  |      |
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ |LShift| Left | Down |Right |  $   |  %   |-------.    ,-------| Left | Down |Right |      |   (  |   )  |
+ |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ |LCtrl |      |      |      |      |      |-------|    |-------|      |   _  |   +  |   {  |   }  |  |   |
+ `-----------------------------------------/       /     \      \-----------------------------------------'
+                   | LAlt |▓▓▓▓▓ |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
+                   |      |▓▓▓▓▓ |    |/      /         \      \ |      |      |      |
+                   `----------------------------'           '------''--------------------'
+```
+**Key Features**: Browser navigation, workspace control (macOS Spaces), word-level text manipulation
+
+### 5️⃣ **FUNCTION** - System Controls
+```
+ ,-----------------------------------------.                    ,-----------------------------------------.
+ |   `  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | F11  |
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ |      |      |      |      |      |      |                    |      | Prev | Next | Play | Vol- | Vol+ |
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ |      |      | Span |      |      |      |-------.    ,-------|      |      |      |      | BrDn | BrUp |
+ |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
+ `-----------------------------------------/       /     \      \-----------------------------------------'
+                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE |▓▓▓▓▓ |
+                   |      |      |    |/      /         \      \ |      |      |▓▓▓▓▓ |
+                   `----------------------------'           '------''--------------------'
+```
+**Key Features**: F1-F12 keys, media controls, brightness, Spanish character picker
+
+### 6️⃣ **SPANISH** - Spanish Characters
+```
+ ,-----------------------------------------.                    ,-----------------------------------------.
+ |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ |  ¡   |      |      |   é  |      |      |                    |      |   ú  |   í  |   ó  |      |   ¿  |
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ |      |   á  |      |      |      |      |-------.    ,-------|      |      |      |      |      |      |
+ |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ |      |      |      |      |      |      |-------|    |-------|   ñ  |      |      |      |      |      |
+ `-----------------------------------------/       /     \      \-----------------------------------------'
+                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
+                   |      |      |    |/      /         \      \ |      |      |      |
+                   `----------------------------'           '------''--------------------'
+```
+**Key Features**: All Spanish accented characters (á é í ó ú ñ) and punctuation (¡ ¿) with one-shot behavior
+
+### 7️⃣ **MOUSE** - Mouse Control
+```
+ ,-----------------------------------------.                    ,-----------------------------------------.
+ |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ |      |      |WheelU|  Up  |WheelD|      |                    |      | Btn1 | Btn3 | Btn2 |      |      |
+ |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ |      |      | Left | Down |Right |      |-------.    ,-------|      |WheelL|WheelD|WheelU|WheelR|      |
+ |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
+ `-----------------------------------------/       /     \      \-----------------------------------------'
+                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |▓▓▓▓▓ | FUNC |
+                   |      |      |    |/      /         \      \ |      |▓▓▓▓▓ |      |
+                   `----------------------------'           '------''--------------------'
+```
+**Key Features**: Complete mouse control - movement, left/right/middle click, scroll wheel
+
+## 🎛️ Layer Access Summary
+
+| Layer Access | Key Combination | Use Case |
+|-------------|------------------|----------|
+| **SHIFT** | Hold Space | Symbols, shifted characters |
+| **NAV** | Left thumb (2nd) | Navigation, text manipulation |
+| **SYMBOLS** | Right thumb (1st) | Programming symbols, brackets |
+| **MOUSE** | Right thumb (2nd) | Mouse control |
+| **FUNCTION** | Right thumb (3rd) | System controls, media keys |
+| **SPANISH** | FUNC + S | Spanish character picker |
+| **Spotlight** | Space + Enter | Cmd+Space combo |
+
+## 🚀 Installation
 
 ### Prerequisites
 ```bash
-# Set up QMK environment
-qmk config user.keyboard=lily58
-qmk config user.keymap=PiXeL16
+# Install QMK if you haven't already
+pip3 install qmk
+qmk setup
 ```
 
-### Compilation
+### Compilation & Flashing
 ```bash
+# Clone/copy this keymap to your QMK installation
+# keyboards/lily58/keymaps/PiXeL16/
+
 # Compile the firmware
 qmk compile -kb lily58/rev1 -km PiXeL16
 
-# Flash to keyboard
+# Flash to your keyboard (put keyboard in bootloader mode first)
 qmk flash -kb lily58/rev1 -km PiXeL16
 ```
 
-### Firmware Stats
-- **Size**: 27,984 / 28,672 bytes (97% used, 688 bytes free)
-- **Features**: Regular home row keys, space layer-tap, Ichigo OLED logo, combos, Spanish support
-- **Performance**: Fast typing with zero modifier delays, standard QMK layer-tap for space
-- **VIA Support**: Disabled to accommodate feature set
-- **Memory Optimization**: Emoji functionality temporarily disabled to free up space
+### Firmware Specifications
+- **Target**: AVR atmega32u4 (Lily58 Rev1)
+- **Size**: Optimized to fit within 28,672 byte limit
+- **Features**: All functionality enabled while staying within memory constraints
 
-## ⚙️ Configuration Details
+## ⚙️ Configuration
 
-### Enabled Features
-- ✅ **Standard Home Row Keys**: Regular letter keys without modifier delays for fast, natural typing
-- ✅ **OLED Display**: Custom graphics and real-time info
-- ✅ **WPM Tracking**: Live typing speed monitoring  
-- ✅ **Unicode Support**: Full emoji and international character support
-- ✅ **Mouse Keys**: Complete mouse control from keyboard
-- ✅ **Extra Keys**: Media and system control
-- ✅ **Custom Layers**: 8 active specialized layers (emoji layer temporarily disabled)
-- ✅ **Combo Keys**: Space+Enter combo support
-
-### Disabled Features
-- ❌ **Emoji Layer**: Temporarily disabled to accommodate SM_TD library (can be re-enabled)
-- ❌ **VIA Support**: Disabled to save memory for custom features
-- ❌ **RGB Lighting**: Focus on OLED displays
-- ❌ **Audio**: Prioritizing other features
-
-## 🎨 Customization Options
-
-### OLED Display Customization
-```c
-// In keyboards/lily58/lib/logo_reader.c
-// Replace the ichigo bitmap array with your own 128x32px bitmap data
-static char logo[] = { /* your bitmap data here */ };
+### Feature Flags (rules.mk)
+```makefile
+OLED_ENABLE = yes              # Dynamic OLED displays
+WPM_ENABLE = yes               # Words per minute tracking  
+MOUSEKEY_ENABLE = yes          # Mouse control layer
+EXTRAKEY_ENABLE = yes          # Media keys
+COMBO_ENABLE = yes             # Key combinations
+LTO_ENABLE = yes               # Link time optimization
 ```
 
-### Layer-Tap Configuration
+### Key Customization Options
+
+#### Motivational Messages
+Edit `motivational_messages.c`:
 ```c
-// In config.h - optimized for smooth typing experience
-#define TAPPING_TERM 200              // 200ms for layer-tap detection
-#define TAPPING_TERM_PER_KEY          // Customizable per key
+static const char* motivational_messages[] = {
+    "Your message here!",
+    "Another motivating phrase!",
+    // Add your own messages
+};
 ```
 
-### Combo Configuration
+#### WPM Threshold  
+Modify `motivational_messages.h`:
 ```c
-// In config.h - combo timing
-#define COMBO_TERM 50                 // 50ms window to press both keys
+#define WPM_THRESHOLD 90        // Change trigger speed
+#define MESSAGE_DISPLAY_DURATION 3000  // Change display time
 ```
 
-### Layer-Tap Configuration
+#### OLED Display Timing
+Edit `oled_images.c`:
 ```c
-// In keymap.c - Space bar layer-tap setup:
-LT(_SHIFT, KC_SPC)  // Space = tap for space, hold for SHIFT layer
-
-// Standard QMK tapping term (in config.h):
-#define TAPPING_TERM 200   // 200ms hold time for layer access
+if (timer_elapsed32(logo_timer) > 60000) {  // Change rotation interval
 ```
 
-### ~~Home Row Modifiers~~ - Removed for Better Typing Experience
-Home row modifiers have been removed to eliminate typing delays. All keys (A, S, D, F, J, K, L, ;) now work as regular letters with instant response.
+#### Custom Graphics
+Replace the image arrays in `oled_images.c` with your own 128×32 pixel bitmap data.
 
-### Custom Logo Setup
-To change the OLED logo, convert your 128x32px image to a bitmap array and replace the data in `keyboards/lily58/lib/logo_reader.c`.
+## 🎮 Usage Guide
 
-### Layer Icon Customization
-Edit `keyboards/lily58/lib/layer_icon_reader.c` to customize the ASCII art layer indicators.
+### Essential Shortcuts
+| Combo | Action | Layer |
+|-------|--------|-------|
+| `Space` (tap) | Space character | Any |
+| `Space` (hold) | Access SHIFT layer | Base |
+| `Space + Enter` | Cmd+Space (Spotlight) | Any |
+| `Fn + S` | Spanish character picker | Function |
 
-## 🎯 Usage Tips
+### Navigation Features
+- **Word Left/Right**: NAV layer + W←/W→
+- **Word Select**: NAV layer + WSel (selects current word)
+- **Word Delete**: NAV layer + WDel (deletes current word)
+- **Workspace Control**: NAV layer + WS←/WS→/WS↑/WS↓
 
-### Essential Combos
-- **Spotlight Search**: Space + Enter → Cmd+Space (quick access to Spotlight)
-- **Emoji Access**: Function layer → E (single tap for layer, double tap for system picker)
-- **Spanish Characters**: Function layer → S → letter
-- **Word Navigation**: NAV layer → W←/W→/WSel/W⌫
-- **Smart Brackets**: SYMBOLS layer → any bracket pair
+### Smart Brackets
+On SYMBOLS layer, bracket keys automatically:
+1. Insert opening bracket
+2. Insert closing bracket  
+3. Position cursor between them
 
-### Layer Access
-- **Primary**: Thumb keys for most-used layers (NAV, SYMBOLS, MOUSE, FUNCTION)
-- **Secondary**: Function layer triggers for specialty layers (EMOJI, SPANISH)
-- **Modifiers**: Standard left/right shift keys and layer access for all modifiers
+## 🔧 Customization
 
-### OLED Information
-- **Left Display**: Always shows current layer and typing stats  
-- **Right Display**: Shows the beautiful Ichigo logo
-- **Status Updates**: Real-time feedback on all layer changes
+### Adding New Motivational Messages
+1. Edit `motivational_messages.c`
+2. Add your message to the array
+3. Recompile firmware
 
-## 🧠 Philosophy
+### Creating Custom OLED Graphics
+1. Create 128×32 pixel monochrome image
+2. Convert to C array format
+3. Replace image data in `oled_images.c`
+4. Rebuild firmware
 
-This keymap embodies the concept that your keyboard should be an extension of your personality and workflow. Every feature serves a purpose:
+### Modifying Layer Behavior
+- Layer definitions: `keymap.c`
+- Layer icons: `lib/layer_state_reader.c`
+- Custom key behaviors: `process_record_user()` in `keymap.c`
 
-- **Visual Identity**: Custom logos reflect personal and professional identity
-- **Productivity**: Advanced text navigation and smart input features
-- **Multilingual**: Support for both English and Spanish workflows  
-- **Efficiency**: Everything accessible within one key press from base layer
-- **Feedback**: Constant visual feedback on keyboard state and performance
 
-## 🌟 Inspiration & References
 
-This keymap was heavily inspired by advanced QMK techniques from:
-- [SM_TD Library](https://github.com/stasmarkin/sm_td) - Revolutionary home row modifier implementation
-- [My Personalised Keyboard](https://leanrada.com/notes/my-personalised-keyboard/) - Advanced layer design and customization concepts
-- **Personal Workflow Needs**: Spanish input, programming efficiency, visual personalization
-- **Community QMK Examples**: Best practices from the QMK community
+## 🙏 Acknowledgments
 
-## 🚀 Future Enhancements
-
-Potential additions (memory permitting):
-- Additional logo rotation options
-- Weather/time display integration  
-- Typing statistics tracking
-- Custom macro recording
-- Advanced animation systems
-
----
-
-**Built with ❤️ and extensive QMK customization**  
-*"Mindset is All" - Every keypress reflects your personal approach to productivity*
+- QMK Community for the incredible firmware framework
+- Lily58 keyboard design and community
+- Open source contributors who make custom keyboards possible

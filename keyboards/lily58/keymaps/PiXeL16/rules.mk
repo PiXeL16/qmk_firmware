@@ -20,8 +20,11 @@ TAP_DANCE_ENABLE = no      # Enable tap dance functionality
 # If you want to change the display of OLED, you need to change here
 SRC +=  ./lib/rgb_state_reader.c \
         ./lib/layer_state_reader.c \
-        ./lib/logo_reader.c \
         ./lib/keylogger.c \
+        motivational_messages.c \
+        oled_images.c \
+        bongocat_animation.c \
+        # ./lib/logo_reader.c \  # Removed - using oled_images.c instead
         # ./lib/mode_icon_reader.c \
         # ./lib/host_led_state_reader.c \
         # ./lib/timelogger.c \
