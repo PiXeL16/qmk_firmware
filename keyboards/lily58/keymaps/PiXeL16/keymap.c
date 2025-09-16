@@ -1,5 +1,4 @@
 #include QMK_KEYBOARD_H
-#include "keymap_spanish.h"
 // #include "sm_td.h"  // Commented out - not using SM_TD
 
 #ifdef WPM_ENABLE
@@ -28,7 +27,6 @@ enum layer_number {
   _NAV,
   _RAISE,
   _FUNCTION,
-  _SPANISH,
   _MOUSE,
   // _EMOJI,  // Commented out to save memory for SM_TD
 };
@@ -58,30 +56,57 @@ enum custom_keycodes {
   SYM_RCBR,      // Smart }
   SYM_LABK,      // Smart <
   SYM_RABK,      // Smart >
-  // Spanish layer picker
-  SPANISH_PICKER, // Spanish character picker
-  ES_A_ACCENT,    // á (alt+e, a)
-  ES_E_ACCENT,    // é (alt+e, e)  
-  ES_I_ACCENT,    // í (alt+e, i)
-  ES_O_ACCENT,    // ó (alt+e, o)
-  ES_U_ACCENT,    // ú (alt+e, u)
-  ES_ENYE,        // ñ (alt+n, n)
-  ES_IEXCL,       // ¡ (alt+1)
-  ES_IQUEST       // ¿ (alt+shift+?)
+  // Raycast window management
+  RAYCAST_LEFT_HALF,    // Ctrl+Alt+Left
+  RAYCAST_RIGHT_HALF,   // Ctrl+Alt+Right
+  RAYCAST_TOP_HALF,     // Ctrl+Alt+Up
+  RAYCAST_BOTTOM_HALF,  // Ctrl+Alt+Down
+  RAYCAST_MAXIMIZE,     // Ctrl+Alt+Enter
+  RAYCAST_CENTER,       // Ctrl+Alt+C
+  MOVE_WINDOW_LEFT,     // Ctrl+Shift+Left
+  MOVE_WINDOW_RIGHT,    // Ctrl+Shift+Right
+  // Clipboard and workflow macros
+  COPY_MACRO,           // Cmd+C
+  PASTE_MACRO,          // Cmd+V
+  CUT_MACRO,            // Cmd+X
+  PASTE_MATCH,          // Cmd+Shift+V
+  URL_TO_NOTES,         // Cmd+Shift+C, wait, Cmd+Shift+A, wait, Cmd+V
+  SCREENSHOT_SEL        // Cmd+Shift+4
 };
 
 // Combo definitions
 enum combo_events {
   SPACE_ENTER_COMBO,
+  URL_TO_NOTES_COMBO,
+  COPY_CV_COMBO,
+  SCREENSHOT_COMBO,
+  CAPS_WORD_COMBO,
+  PASTE_ZX_COMBO,
+  CUT_GH_COMBO,
+  PASTE_MATCH_JK_COMBO,
   COMBO_LENGTH
 };
 
 // Define which keys make up each combo
 const uint16_t PROGMEM space_enter_combo[] = {LT(_SHIFT, KC_SPC), KC_ENT, COMBO_END};
+const uint16_t PROGMEM url_to_notes_combo[] = {KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM copy_cv_combo[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM screenshot_combo[] = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM caps_word_combo[] = {KC_LSFT, KC_EQUAL, COMBO_END};
+const uint16_t PROGMEM paste_zx_combo[] = {KC_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM cut_gh_combo[] = {KC_G, KC_H, COMBO_END};
+const uint16_t PROGMEM paste_match_jk_combo[] = {KC_J, KC_K, COMBO_END};
 
 // Map combos to their key combinations
 combo_t key_combos[] = {
   [SPACE_ENTER_COMBO] = COMBO(space_enter_combo, KC_NO), // KC_NO means we handle it in process_combo_event
+  [URL_TO_NOTES_COMBO] = COMBO(url_to_notes_combo, URL_TO_NOTES),
+  [COPY_CV_COMBO] = COMBO(copy_cv_combo, COPY_MACRO),
+  [SCREENSHOT_COMBO] = COMBO(screenshot_combo, SCREENSHOT_SEL),
+  [CAPS_WORD_COMBO] = COMBO(caps_word_combo, CW_TOGG),
+  [PASTE_ZX_COMBO] = COMBO(paste_zx_combo, PASTE_MACRO),
+  [CUT_GH_COMBO] = COMBO(cut_gh_combo, CUT_MACRO),
+  [PASTE_MATCH_JK_COMBO] = COMBO(paste_match_jk_combo, PASTE_MATCH),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -166,33 +191,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_FUNCTION] = LAYOUT(
   KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-  _______, _______, _______, /*EMOJI_PICKER*/ _______, _______, _______,       _______, KC_MPRV, KC_MNXT, KC_MPLY, KC_VOLD, KC_VOLU,
-  _______, _______, SPANISH_PICKER, _______, _______, _______,                   _______, _______, _______, KC_BRMD, KC_BRMU, _______,
+  CW_TOGG, _______, _______, /*EMOJI_PICKER*/ _______, _______, _______,       _______, KC_MPRV, KC_MNXT, KC_MPLY, KC_VOLD, KC_VOLU,
+  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, KC_BRMD, KC_BRMU, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                              KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
-/* SPANISH (Español)
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |  ¡   |      |      |   é  |      |      |                    |      |   ú  |   í  |   ó  |      |   ¿  |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |   á  |      |      |      |      |-------.    ,-------|      |      |      |      |      |      |
- * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|   ñ  |      |      |      |      |      |
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
- *                   |      |      |      |/      /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
- */
-[_SPANISH] = LAYOUT(
-  TO(_QWERTY), _______, _______, _______, _______, _______,              _______, _______, _______, _______, _______, _______,
-  ES_IEXCL, _______, _______, ES_E_ACCENT, _______, _______,              _______, ES_U_ACCENT, ES_I_ACCENT, ES_O_ACCENT, _______, ES_IQUEST,
-  _______, ES_A_ACCENT, _______, _______, _______, _______,                  _______, _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, ES_ENYE, _______, _______, _______, _______, _______,
-                             KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
-),
-
 /* MOUSE (Mouse control and navigation)
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
@@ -214,23 +217,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* NAV (Navigation)
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      | Back | Fwd  |TbPrv |TbNxt |      |                    |WS←   |WS→   |WS↑   |WS↓   |      |      |
+ * |      | Back | Fwd  |TbPrv |TbNxt |      |                    |WS←   |WS→   |WS↑   |WS↓   |RMax  |RCtr  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |  Up  |      |      |      |                    |WLeft | WUp  |WRight|WSel  |WDel  |      |
+ * |      |      |      |  ↑   |      |      |                    |WLeft |WRight|  ↑   |WSel  |WDel  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |LShift| Left | Down |Right |  $   |  %   |-------.    ,-------| Left | Down |Right |      |   (  |   )  |
+ * |LShift|      |  ←   |  ↓   |  →   |      |-------.    ,-------|      |  ←   |  ↓   |  →   |      |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |LCtrl |      |      |      |      |      |-------|    |-------|      |   _  |   +  |   {  |   }  |  |   |
+ * |LCtrl |      |      |      | MW←  | MW→  |-------|    |-------|  R←  |  R→  |  R↑  |  R↓  |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | NAV  |LGUI| /Space/         \Enter \  |SYMBO |MOUSE | FUNC |
  *                   |      |      |      |/      /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
 [_NAV] = LAYOUT(
-  _______, NAV_BACK, NAV_FORWARD, TAB_PREV, TAB_NEXT, _______,                   WS_LEFT, WS_RIGHT, WS_UP, WS_DOWN, _______, _______,
-  _______, _______, KC_UP, _______, _______, _______,                   WORD_LEFT, KC_UP, WORD_RIGHT, WORD_SELECT, WORD_DELETE, _______,
-  KC_LSFT, KC_LEFT, KC_DOWN, KC_RGHT, S(KC_4), S(KC_5),                   KC_LEFT, KC_DOWN, KC_RGHT, _______, S(KC_9), S(KC_0),
-  KC_LCTL, _______, _______, _______, _______, _______, _______, _______, XXXXXXX, S(KC_MINS), S(KC_EQL), S(KC_LBRC), S(KC_RBRC), S(KC_BSLS),
+  _______, NAV_BACK, NAV_FORWARD, TAB_PREV, TAB_NEXT, _______,                   WS_LEFT, WS_RIGHT, WS_UP, WS_DOWN, RAYCAST_MAXIMIZE, RAYCAST_CENTER,
+  _______, _______, _______, KC_UP, _______, _______,                   WORD_LEFT, WORD_RIGHT, KC_UP, WORD_SELECT, WORD_DELETE, _______,
+  KC_LSFT, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______,                   _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,
+  KC_LCTL, _______, _______, _______, MOVE_WINDOW_LEFT, MOVE_WINDOW_RIGHT, _______, _______, RAYCAST_LEFT_HALF, RAYCAST_RIGHT_HALF, RAYCAST_TOP_HALF, RAYCAST_BOTTOM_HALF, _______, _______,
                              KC_LALT, MO(_NAV), KC_LGUI, KC_SPC, KC_ENT, MO(_SYMBOLS), MO(_MOUSE), MO(_FUNCTION)
 ),
 /* RAISE
@@ -507,91 +510,159 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
 
-    // Spanish accented characters using Alt+key combinations (macOS)
-    case ES_A_ACCENT:
+
+    // Raycast window management
+    case RAYCAST_LEFT_HALF:
       if (record->event.pressed) {
+        register_code(KC_LCTL);
         register_code(KC_LALT);
-        tap_code(KC_E);  // Alt+E for acute accent
+        tap_code(KC_LEFT);
         unregister_code(KC_LALT);
-        tap_code(KC_A);  // Then press A
-        layer_off(_SPANISH);
-      }
-      return false;
-      
-    case ES_E_ACCENT:
-      if (record->event.pressed) {
-        register_code(KC_LALT);
-        tap_code(KC_E);  // Alt+E for acute accent
-        unregister_code(KC_LALT);
-        tap_code(KC_E);  // Then press E
-        layer_off(_SPANISH);
-      }
-      return false;
-      
-    case ES_I_ACCENT:
-      if (record->event.pressed) {
-        register_code(KC_LALT);
-        tap_code(KC_E);  // Alt+E for acute accent
-        unregister_code(KC_LALT);
-        tap_code(KC_I);  // Then press I
-        layer_off(_SPANISH);
-      }
-      return false;
-      
-    case ES_O_ACCENT:
-      if (record->event.pressed) {
-        register_code(KC_LALT);
-        tap_code(KC_E);  // Alt+E for acute accent
-        unregister_code(KC_LALT);
-        tap_code(KC_O);  // Then press O
-        layer_off(_SPANISH);
-      }
-      return false;
-      
-    case ES_U_ACCENT:
-      if (record->event.pressed) {
-        register_code(KC_LALT);
-        tap_code(KC_E);  // Alt+E for acute accent
-        unregister_code(KC_LALT);
-        tap_code(KC_U);  // Then press U
-        layer_off(_SPANISH);
+        unregister_code(KC_LCTL);
       }
       return false;
 
-    case ES_ENYE:  // ñ
+    case RAYCAST_RIGHT_HALF:
       if (record->event.pressed) {
+        register_code(KC_LCTL);
         register_code(KC_LALT);
-        tap_code(KC_N);  // Alt+N for tilde accent
+        tap_code(KC_RGHT);
         unregister_code(KC_LALT);
-        tap_code(KC_N);  // Then press N
-        layer_off(_SPANISH);
+        unregister_code(KC_LCTL);
       }
       return false;
 
-    case ES_IEXCL:  // ¡
+    case RAYCAST_TOP_HALF:
       if (record->event.pressed) {
+        register_code(KC_LCTL);
         register_code(KC_LALT);
-        tap_code(KC_1);  // Alt+1 for ¡
+        tap_code(KC_UP);
         unregister_code(KC_LALT);
-        layer_off(_SPANISH);
+        unregister_code(KC_LCTL);
       }
       return false;
 
-    case ES_IQUEST:  // ¿
+    case RAYCAST_BOTTOM_HALF:
       if (record->event.pressed) {
+        register_code(KC_LCTL);
         register_code(KC_LALT);
+        tap_code(KC_DOWN);
+        unregister_code(KC_LALT);
+        unregister_code(KC_LCTL);
+      }
+      return false;
+
+    case RAYCAST_MAXIMIZE:
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
+        register_code(KC_LALT);
+        tap_code(KC_ENT);
+        unregister_code(KC_LALT);
+        unregister_code(KC_LCTL);
+      }
+      return false;
+
+    case RAYCAST_CENTER:
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
+        register_code(KC_LALT);
+        tap_code(KC_C);
+        unregister_code(KC_LALT);
+        unregister_code(KC_LCTL);
+      }
+      return false;
+
+    case MOVE_WINDOW_LEFT:
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
         register_code(KC_LSFT);
-        tap_code(KC_SLSH);  // Alt+Shift+? for ¿
+        tap_code(KC_LEFT);
         unregister_code(KC_LSFT);
-        unregister_code(KC_LALT);
-        layer_off(_SPANISH);
+        unregister_code(KC_LCTL);
       }
       return false;
 
-    case SPANISH_PICKER:
+    case MOVE_WINDOW_RIGHT:
       if (record->event.pressed) {
-        // Activate Spanish one-shot layer
-        layer_on(_SPANISH);
+        register_code(KC_LCTL);
+        register_code(KC_LSFT);
+        tap_code(KC_RGHT);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_LCTL);
+      }
+      return false;
+
+    // Clipboard and workflow macros
+    case COPY_MACRO:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        tap_code(KC_C);
+        unregister_code(KC_LGUI);
+      }
+      return false;
+
+    case PASTE_MACRO:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        tap_code(KC_V);
+        unregister_code(KC_LGUI);
+      }
+      return false;
+
+    case CUT_MACRO:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        tap_code(KC_X);
+        unregister_code(KC_LGUI);
+      }
+      return false;
+
+    case PASTE_MATCH:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        register_code(KC_LSFT);
+        tap_code(KC_V);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_LGUI);
+      }
+      return false;
+
+    case URL_TO_NOTES:
+      if (record->event.pressed) {
+        // Cmd+Shift+C (copy link)
+        register_code(KC_LGUI);
+        register_code(KC_LSFT);
+        tap_code(KC_C);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_LGUI);
+        
+        // Wait 200ms
+        wait_ms(200);
+        
+        // Cmd+Shift+A (open action/notes app)
+        register_code(KC_LGUI);
+        register_code(KC_LSFT);
+        tap_code(KC_A);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_LGUI);
+        
+        // Wait 300ms
+        wait_ms(300);
+        
+        // Cmd+V (paste)
+        register_code(KC_LGUI);
+        tap_code(KC_V);
+        unregister_code(KC_LGUI);
+      }
+      return false;
+
+    case SCREENSHOT_SEL:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        register_code(KC_LSFT);
+        tap_code(KC_4);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_LGUI);
       }
       return false;
   }

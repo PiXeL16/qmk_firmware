@@ -1,4 +1,4 @@
-# 🎹 PiXeL16 - Advanced QMK Keymap for Lily58
+# 🎹 PiXeL16 - An Advance QMK Keymap for Lily58
 
 [![QMK](https://img.shields.io/badge/QMK-firmware-blue.svg)](https://qmk.fm/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -204,7 +204,7 @@ The Lily58 has a split ergonomic design with 6×4+4 key matrix per side. Here ar
 | **SPANISH** | FUNC + S | Spanish character picker |
 | **Spotlight** | Space + Enter | Cmd+Space combo |
 
-## 🚀 Installation
+## 🚀 Installation & Compilation
 
 ### Prerequisites
 ```bash
@@ -213,17 +213,33 @@ pip3 install qmk
 qmk setup
 ```
 
-### Compilation & Flashing
-```bash
-# Clone/copy this keymap to your QMK installation
-# keyboards/lily58/keymaps/PiXeL16/
+### Step-by-Step Compilation
+1. **Copy this keymap** to your QMK installation:
+   ```
+   keyboards/lily58/keymaps/PiXeL16/
+   ```
 
-# Compile the firmware
-qmk compile -kb lily58/rev1 -km PiXeL16
+2. **Compile the firmware** from the root of the qmk_firmware directory:
+   ```bash
+   # Option 1: Using make command
+   make lily58:PiXeL16
+   
+   # Option 2: Using qmk compile command  
+   qmk compile -kb lily58/rev1 -km PiXeL16
+   ```
 
-# Flash to your keyboard (put keyboard in bootloader mode first)
-qmk flash -kb lily58/rev1 -km PiXeL16
-```
+3. **Locate the firmware file**: 
+   - New `.hex` file will be generated in the root of the qmk_firmware folder
+   - File will be named: `lily58_rev1_PiXeL16.hex`
+
+4. **Flash the firmware**:
+   ```bash
+   # Option 1: Direct flash (put keyboard in bootloader mode first)
+   qmk flash -kb lily58/rev1 -km PiXeL16
+   
+   # Option 2: Using QMK Toolbox
+   # Move the .hex file to your desired folder and flash via QMK Toolbox GUI
+   ```
 
 ### Firmware Specifications
 - **Target**: AVR atmega32u4 (Lily58 Rev1)
@@ -300,10 +316,51 @@ On SYMBOLS layer, bracket keys automatically:
 3. Recompile firmware
 
 ### Creating Custom OLED Graphics
-1. Create 128×32 pixel monochrome image
-2. Convert to C array format
-3. Replace image data in `oled_images.c`
-4. Rebuild firmware
+
+This keymap includes three custom OLED images that rotate on the right display:
+
+#### 📸 Current OLED Images
+The keymap includes these artwork files in `oled/images/`:
+- **`ichigo.png`** - Anime character artwork (128×32)
+- **`pixel16_logo.png`** - Custom PiXeL16 branding logo (128×32)
+- **`mindset_is_all.png`** - Motivational third logo (128×32)
+
+#### 🎨 How to Replace OLED Images
+
+1. **Create your image**:
+   - Dimensions: **128×32 pixels** (required for Lily58 OLED)
+   - Format: Monochrome/1-bit (black and white only)
+   - Save as PNG or other common format
+
+2. **Convert to C array using image2cpp**:
+   - Go to [image2cpp online converter](http://javl.github.io/image2cpp/)
+   - Upload your 128×32 image
+   - Settings:
+     - Canvas size: 128×32
+     - Background color: Black
+     - Invert image colors: ☑ (check this)
+     - Brightness/alpha threshold: 128
+     - Output format: Arduino code
+     - Identifier: `your_image_name`
+
+3. **Replace image data in `oled_images.c`**:
+   ```c
+   // Replace one of these arrays with your converted data:
+   const char PROGMEM ichigo_logo[] = { /* your new data here */ };
+   const char PROGMEM pixel16_logo[] = { /* your new data here */ };  
+   const char PROGMEM third_logo[] = { /* your new data here */ };
+   ```
+
+4. **Rebuild firmware**:
+   ```bash
+   qmk compile -kb lily58/rev1 -km PiXeL16
+   ```
+
+#### 💡 Image Tips
+- **Use high contrast**: Simple black/white designs work best
+- **Avoid fine details**: 128×32 is quite small, bold shapes work better
+- **Test your design**: Preview at actual size before converting
+- **Consider the rotation**: Images change every 60 seconds, design accordingly
 
 ### Modifying Layer Behavior
 - Layer definitions: `keymap.c`
