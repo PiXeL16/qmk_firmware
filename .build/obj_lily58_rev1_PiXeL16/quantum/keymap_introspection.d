@@ -27,7 +27,7 @@
  quantum/process_keycode/process_space_cadet.h \
  quantum/send_string/send_string.h \
  quantum/send_string/send_string_keycodes.h drivers/oled/oled_driver.h \
- quantum/wpm.h quantum/mousekey.h quantum/keymap_extras/keymap_spanish.h \
+ quantum/wpm.h quantum/mousekey.h \
  keyboards/lily58/keymaps/PiXeL16/motivational_messages.h \
  keyboards/lily58/keymaps/PiXeL16/oled_images.h \
  keyboards/lily58/keymaps/PiXeL16/bongocat_animation.h \
@@ -152,8 +152,6 @@ drivers/oled/oled_driver.h:
 quantum/wpm.h:
 
 quantum/mousekey.h:
-
-quantum/keymap_extras/keymap_spanish.h:
 
 keyboards/lily58/keymaps/PiXeL16/motivational_messages.h:
 
