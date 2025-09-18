@@ -8,9 +8,7 @@
 #define L_NAV 3
 #define L_RAISE 4
 #define L_FUNCTION 5
-#define L_SPANISH 6
-#define L_MOUSE 7
-#define L_EMOJI 8
+#define L_MOUSE 6
 
 char layer_state_str[24];
 
@@ -37,14 +35,8 @@ const char *read_layer_state(void) {
   case L_FUNCTION:
     snprintf(layer_state_str, sizeof(layer_state_str), "FUNCTION");
     break;
-  case L_SPANISH:
-    snprintf(layer_state_str, sizeof(layer_state_str), "ESPANOL");
-    break;
   case L_MOUSE:
     snprintf(layer_state_str, sizeof(layer_state_str), "MOUSE");
-    break;
-  case L_EMOJI:
-    snprintf(layer_state_str, sizeof(layer_state_str), "EMOJI");
     break;
   default:
     snprintf(layer_state_str, sizeof(layer_state_str), "Undef");
